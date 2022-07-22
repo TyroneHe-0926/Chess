@@ -4,5 +4,6 @@
 
 typedef std::pair<int, int> position;
 typedef std::pair<position, position> move;
+typedef std::pair<move, int> moveinfo;
 
 #endif
