@@ -9,6 +9,7 @@ class TextDisplay{
   public:
     void notify(Observer&);
     friend std::ostream& operator<<(std::ostream&, const TextDisplay&);
+    TextDisplay();
 };
 
 #endif

@@ -9,5 +9,5 @@ Board::~Board(){
 }
 
 std::ostream& operator<<(std::ostream& out, Board& pb){
-    return out << pb.td << std::endl;
+    return out << pb.td;
 }
