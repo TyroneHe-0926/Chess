@@ -1,6 +1,7 @@
 #include "knight.h"
 #include <utility>
 #include "board.h"
+using namespace std;
 
 Knight::Knight(Position p): ChessPiece(p) {
     piece.first = PieceType::Knight;
@@ -61,7 +62,7 @@ std::vector<Position> Knight::getAvalibleMoves(Position pos, Board* board) {
             result.emplace_back(retpos); 
         }
     }
-    if(y-1 >= 1 && x-2 >= 0){ 
+    if(y-1 >= 1 && x-2 >= 1){ 
         retpos.first = (locationx)(x-2);
         retpos.second = y-1;
         if(board->getType(retpos).second != board->getType(pos).second){
