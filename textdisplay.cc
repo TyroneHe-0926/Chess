@@ -26,9 +26,9 @@ void TextDisplay::notify(Cell& c){
         default: intoDisp = (temp.first+temp.second)%2?' ':'_';
     }
     if(c.getType().second){
-        intoDisp+=26;
+        intoDisp+=32;
     }
-    display[((int)temp.first)-1][temp.second-1] = intoDisp;
+    display[8-temp.second][((int)temp.first)-1] = intoDisp;
 }
 
 std::ostream &operator<<(std::ostream& out, const TextDisplay& ptd){
