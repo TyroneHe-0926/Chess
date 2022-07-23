@@ -45,10 +45,9 @@ void Game::play(){
                 vector<PossibleMoves> pm = b->getAllAvailableMoves(side, b);
                 for(auto m : pm){
                     for(auto d : m.destination){
-                        cout<<d.first<<" "<<d.second<<endl;
-                        // if(dest.first == d.first && dest.second == d.second){
-                        //     b->nextMove(nextmove);
-                        // }
+                        if(dest.first == d.first && dest.second == d.second){
+                            b->nextMove(nextmove);
+                        }
                     }
                 }
             }
