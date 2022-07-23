@@ -18,6 +18,8 @@ class Board{
     bool isWon();
     void undoMove();
     void nextMove(ChessMove);
+    Piece getType(Position);
+    std::vector<ChessMove> getMoveList(bool side);
     Board();
     ~Board();
     friend std::ostream& operator<<(std::ostream&, Board&);

@@ -4,7 +4,7 @@ bool Board::isWon(){
     return checkmate;
 }
 
-Board::Board(): grid{}, td{new TextDisplay}, checkmate{false} {
+Board::Board(): grid{}, td{new TextDisplay}, gui{new GUI}, checkmate{false} {
     for(int i = 1; i <= 8; ++i){
         grid.push_back({Cell({A,i},{td,gui}), Cell({B,i},{td,gui}), 
             Cell({C,i},{td,gui}), Cell({D,i},{td,gui}), Cell({E,i},{td,gui}), 
@@ -16,10 +16,19 @@ void Board::init(){
 
 }
 
+void Board::nextMove(ChessMove move){
+    
+}
+
 Board::~Board(){
     delete td;
 }
 
 std::ostream& operator<<(std::ostream& out, Board& pb){
     return out << *pb.td;
+}
+
+Board::~Board(){
+    delete td;
+    delete gui;
 }
