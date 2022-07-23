@@ -2,7 +2,7 @@
 #define TYPE_H_
 #include <utility>
 
-enum PieceType{
+enum class PieceType{
     Pawn = 1,
     Bishop = 2,
     Rook = 3,

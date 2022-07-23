@@ -4,9 +4,10 @@
 
 class Queen : public ChessPiece{
   public:
-    Queen(Piece);
+    Queen(position);
     std::vector<chessmove> getAvalibleMoves(position, Board*) override;
     Piece getType() override;
+    ~Queen(){}
 };
 
 #endif

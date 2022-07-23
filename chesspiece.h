@@ -12,7 +12,7 @@ class ChessPiece{
     virtual std::vector<chessmove> getAvalibleMoves(position, Board*) = 0;
     virtual Piece getType() = 0;
     ChessPiece(position p);
-    ~ChessPiece(){};
+    virtual ~ChessPiece(){};
 };
 
 #endif

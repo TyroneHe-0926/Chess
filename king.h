@@ -5,9 +5,10 @@
 
 class King : private ChessPiece {
   public:
-    King(Piece);
+    King(position);
     std::vector<chessmove> getAvalibleMoves(position, Board*) override;
     Piece getType() override;
+    ~King(){};
 };
 
 #endif

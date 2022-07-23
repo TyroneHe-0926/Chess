@@ -8,7 +8,6 @@ Human::Human(bool side) : side{side} {}
 bool Human::getSide() { return side; }
 
 chessmove Human::getNextMove(Board&){
-    locationx outx;
     position pos1, pos2;
     string src, target;
     chessmove result;

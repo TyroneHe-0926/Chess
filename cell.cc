@@ -9,7 +9,7 @@ Piece Cell::getType(){
     if(!obj){
         return obj->getType();
     }
-    return {Empty, false};
+    return {PieceType::Empty, false};
 }
 
 Cell::Cell(position Pos): obj{nullptr}, Pos{Pos} {

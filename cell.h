@@ -1,10 +1,11 @@
 #ifndef CELL_H_
 #define CELL_H_
 #include <vector>
+#include <memory>
 #include "subject.h"
 #include "types.h"
-#include "chesspiece.h"
 
+class ChessPiece;
 
 class Cell : public Subject{
     ChessPiece* obj;
