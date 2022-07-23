@@ -2,19 +2,21 @@
 #define CELL_H_
 #include <vector>
 #include "subject.h"
-
-class ChessPiece;
+#include "types.h"
+#include "chesspiece.h"
 
 
 class Cell : public Subject{
     ChessPiece* obj;
-    std::vector<Observer*> ob;
+    position Pos;
   public:
     void notifyObserver();
     void getState();
     void setState(ChessPiece*);
-    void getCoords();
-    void getType();
+    position getCoords();
+    Piece getType();
+    Cell(position Pos);
+    ~Cell();
 };
 
 

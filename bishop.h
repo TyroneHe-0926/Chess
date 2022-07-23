@@ -7,7 +7,7 @@ class Bishop : public ChessPiece{
     Piece piece;
 public:
     Bishop(Piece);
-    std::vector<move> getAvalibleMoves(position, Board&) override;
+    std::vector<chessmove> getAvalibleMoves(position, Board&) override;
     Piece getType() override;
 };
 

@@ -10,7 +10,7 @@ public:
     Computer(bool, int);
     bool getSide() override;
     int getDiff();
-    move getNextMove() override;
+    chessmove getNextMove() override;
 };
 
 #endif

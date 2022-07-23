@@ -7,7 +7,7 @@ class Knight : public ChessPiece {
     Piece piece;
 public:
     Knight(Piece);
-    std::vector<move> getAvalibleMoves(position, Board&) override;
+    std::vector<chessmove> getAvalibleMoves(position, Board&) override;
     Piece getType() override;
 };
 

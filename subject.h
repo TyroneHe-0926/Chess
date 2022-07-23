@@ -4,6 +4,7 @@
 
 
 class Subject : public Observer{
+    std::vector<Observer*> ob;
   public:
     void notifyObservers();
     void attach(Observer*);

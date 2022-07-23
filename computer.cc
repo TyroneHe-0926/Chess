@@ -7,7 +7,7 @@ int Computer::getDiff(){ return difficulty; }
 
 bool Computer::getSide(){ return side; }
 
-move Computer::getNextMove(){
+chessmove Computer::getNextMove(){
     pair<pair<char, int>, pair<char, int>> result;
     pair<char, int> inputs;
     pair<char, int> targets;

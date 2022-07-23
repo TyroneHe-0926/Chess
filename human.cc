@@ -6,7 +6,7 @@ Human::Human(bool side) : side{side} {}
     
 bool Human::getSide() { return side; }
 
-move Human::getNextMove(){
+chessmove Human::getNextMove(){
     pair<pair<char, int>, pair<char, int>> result;
     pair<char, int> inputs;
     pair<char, int> targets;

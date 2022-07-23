@@ -9,7 +9,7 @@ class Move : public Observer{
     std::vector<moveinfo> history;
     void pop();
   public:
-    move getLastMove();
+    chessmove getLastMove();
     void notify(Observer&);
     void getSubType();
 };

@@ -4,6 +4,10 @@ bool Board::isWon(){
     return checkmate;
 }
 
+Board::Board(): grid{}, td{new TextDisplay}, checkmate{false} {
+    
+}
+
 Board::~Board(){
     delete td;
 }

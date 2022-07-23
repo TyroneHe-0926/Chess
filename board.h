@@ -16,8 +16,8 @@ class Board{
     void init();
     bool isWon();
     void undoMove();
-    void nextMove(move);
-    Board(): grid{}, td{new TextDisplay}, checkmate{false} {};
+    void nextMove(chessmove);
+    Board();
     ~Board();
     friend std::ostream& operator<<(std::ostream&, Board&);
 };

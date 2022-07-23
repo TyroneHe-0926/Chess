@@ -8,7 +8,7 @@ class Human : public Player{
 public:
     Human(bool);
     bool getSide() override;
-    move getNextMove() override;
+    chessmove getNextMove() override;
 };
 
 #endif
