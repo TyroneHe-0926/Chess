@@ -21,6 +21,7 @@ void Cell::attach(Observer* obs){
 
 void Cell::setState(std::shared_ptr<ChessPiece>* next){
     obj.swap(*next);
+    notifyObservers();
 }
 
 position Cell::getCoords(){
@@ -65,6 +66,7 @@ Cell::Cell(position Pos, Observe a): ob{}, obj{nullptr}, Pos{Pos} {
             }
             break;
     }
+    notifyObservers();
 }
 
 Cell::~Cell(){}

@@ -23,7 +23,7 @@ void TextDisplay::notify(Cell& c){
             break;
         case PieceType::King: intoDisp = 'K';
             break;
-        default: intoDisp = ' ';
+        default: intoDisp = (temp.first+temp.second)%2?' ':'_';
     }
     if(c.getType().second){
         intoDisp+=26;
