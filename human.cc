@@ -7,6 +7,37 @@ Human::Human(bool side) : side{side} {}
     
 bool Human::getSide() { return side; }
 
+locationx charToX(char src){
+    locationx ret;
+    switch(src){
+        case 'A':
+            ret = A;
+            break;
+        case 'B':
+            ret = B;
+            break;
+        case 'C':
+            ret = C;
+            break;
+        case 'D':
+            ret = D;
+            break;
+        case 'E':
+            ret = E;
+            break;
+        case 'F':
+            ret = F;
+            break;
+        case 'G':
+            ret = G;
+            break;
+        case 'H':
+            ret = H;
+            break;
+    }
+    return ret;
+}
+
 ChessMove Human::getNextMove(Board*){
     Position pos1, pos2;
     string src, target;
@@ -20,12 +51,12 @@ ChessMove Human::getNextMove(Board*){
             cin>>src>>target;
     }
 
-    locationx inx = (locationx) toupper(src[0] - '@');
-    locationx outx = (locationx) toupper(target[0] - '@');
-    int iny = src[1], outy = target[1];
+    char cinx = toupper(src[0]), coutx = toupper(target[0]);
+    locationx inx = charToX(cinx), outx = charToX(coutx);
+
+    int iny = src[1] - '0', outy = target[1] - '0';
     pos1 = make_pair(inx, iny);
     pos2 = make_pair(outx, outy);
     result = make_pair(pos1, pos2);
-
     return result;
 }
