@@ -7,7 +7,7 @@ int Computer::getDiff(){ return difficulty; }
 
 bool Computer::getSide(){ return side; }
 
-ChessMove Computer::getNextMove(Board&){
+ChessMove Computer::getNextMove(Board*){
     ChessMove result;
     //use our algorithm according to diff level to calculate the result and return
     return result;

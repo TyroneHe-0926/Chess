@@ -6,12 +6,13 @@ using namespace std;
 
 Game::Game() : side{0}{}
 
-void Game::initGame(){
-    string input;
-    string p1, p2;
+void Game::play(){
+    string command, p1, p2;
+    ChessMove nextmove;
+    bool started = false;
     int diff;
-    while(cin>>input){
-        if(input == "game"){
+    while(cin>>command){
+        if(command == "game"){
             cin>>p1>>p2;
             if(p1 == "human"){
                 player1 = new Human{0};
@@ -28,20 +29,10 @@ void Game::initGame(){
                 diff = p2.back();
                 player2 = new Computer{1, diff};
             }
-            break;
+            started = true;
+            cout<<b<<endl;
         }
-        else{
-            cout<<"Please initialize the game first!"<<endl;
-        }
-    }
-    cout<<b<<endl;
-}
-
-void Game::play(){
-    string command;
-    ChessMove nextmove;
-    while(cin>>command){
-        if(command == "move"){
+        if(command == "move" && started){
             if(side){
                 nextmove = player2->getNextMove(b);
             }
@@ -49,6 +40,9 @@ void Game::play(){
                 nextmove = player1->getNextMove(b);
             }
             side = !side;
+        }
+        else{
+            cout<<"Game is not initalized yet!"<<endl;
         }
         if(command == "resign"){
             if(side){
@@ -58,8 +52,11 @@ void Game::play(){
                 //player 2 wins
             }
         }
-        if(command == "setup"){
-            b.init();
+        if(command == "setup" && !started){
+            b->init();
+        }
+        else{
+            cout<<"No setup during a game!"<<endl;
         }
     }
 }

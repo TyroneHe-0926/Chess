@@ -7,14 +7,13 @@
 
 
 class Game{
-    Board b;
+    Board *b;
     bool side;
     Player* player1;
     Player* player2;
   public:
     Game();
     void play();
-    void initGame();
 };
 
 
