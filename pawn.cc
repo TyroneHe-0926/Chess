@@ -4,7 +4,7 @@ Pawn::Pawn(Position p): ChessPiece(p) {
     piece.first = PieceType::Pawn;
 }
 
-std::vector<ChessMove> Pawn::getAvalibleMoves(Position, Board*) {
+std::vector<Position> Pawn::getAvalibleMoves(Position, Board*) {
     return {};
 }
 

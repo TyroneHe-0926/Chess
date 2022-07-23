@@ -4,7 +4,7 @@ Rook::Rook(Position p): ChessPiece(p) {
     piece.first = PieceType::Rook;
 }
 
-std::vector<ChessMove> Rook::getAvalibleMoves(Position, Board*) {
+std::vector<Position> Rook::getAvalibleMoves(Position, Board*) {
     return {};
 }
 

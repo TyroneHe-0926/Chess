@@ -1,6 +1,6 @@
 #include "bishop.h"
 
-std::vector<ChessMove> Bishop::getAvalibleMoves(Position, Board*) {
+std::vector<Position> Bishop::getAvalibleMoves(Position, Board*) {
     return {};
 }
 

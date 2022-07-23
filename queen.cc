@@ -4,7 +4,7 @@ Queen::Queen(Position p): ChessPiece(p) {
     piece.first = PieceType::Queen;
 }
 
-std::vector<ChessMove> Queen::getAvalibleMoves(Position, Board*) {
+std::vector<Position> Queen::getAvalibleMoves(Position, Board*) {
     return {};
 }
 
