@@ -1,10 +1,10 @@
 #ifndef OBSERVER_H_
 #define OBSERVER_H_
 
+class Cell;
 class Observer{
   public:
-    void notify(Observer&);
-    void subType();
+    virtual void notify(Cell&)=0;
 };
 
 #endif

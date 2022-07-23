@@ -11,6 +11,7 @@
 class Board{
     std::vector<std::vector<Cell>> grid;
     TextDisplay* td;
+    GUI* gui;
     bool checkmate;
   public:
     void init();

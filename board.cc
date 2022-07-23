@@ -6,9 +6,9 @@ bool Board::isWon(){
 
 Board::Board(): grid{}, td{new TextDisplay}, checkmate{false} {
     for(int i = 1; i <= 8; ++i){
-        grid.push_back({Cell({A,i}),
-            Cell({B,i}), Cell({C,i}), Cell({D,i}), Cell({E,i}), 
-            Cell({F,i}), Cell({G,i}), Cell({H,i})});
+        grid.push_back({Cell({A,i},{td,gui}), Cell({B,i},{td,gui}), 
+            Cell({C,i},{td,gui}), Cell({D,i},{td,gui}), Cell({E,i},{td,gui}), 
+            Cell({F,i},{td,gui}), Cell({G,i},{td,gui}), Cell({H,i},{td,gui})});
     }
 }
 

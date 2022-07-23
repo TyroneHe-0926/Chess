@@ -4,12 +4,13 @@
 #include <iostream>
 #include "observer.h"
 
-class TextDisplay{
+class TextDisplay : public Observer{
     std::vector<std::vector<char>> display;
   public:
-    void notify(Observer&);
+    void notify(Cell&) override;
     friend std::ostream& operator<<(std::ostream&, const TextDisplay&);
     TextDisplay();
+    virtual ~TextDisplay(){};
 };
 
 #endif

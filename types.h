@@ -2,11 +2,13 @@
 #define TYPE_H_
 #include <utility>
 
+class Observer;
+
 enum class PieceType{
     Pawn = 1,
-    Bishop = 2,
-    Rook = 3,
-    Knight = 4,
+    Rook = 2,
+    Knight = 3,
+    Bishop = 4,
     Queen = 5,
     King = 6,
     Empty = 0 // ChessPiece should not have this type. Cell.getType() should return this type though
@@ -18,5 +20,6 @@ typedef std::pair<PieceType, bool> Piece;
 typedef std::pair<locationx, int> position;
 typedef std::pair<position, position> chessmove;
 typedef std::pair<chessmove, PieceType> moveinfo;
+typedef std::pair<Observer*, Observer*> Observe;
 
 #endif

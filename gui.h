@@ -3,9 +3,8 @@
 #include "observer.h"
 
 class GUI : public Observer{
-    void notify(Observer&);
-    void getSubType();
-    
+  public:
+    void notify(Cell&) override;
 };
 
 #endif
