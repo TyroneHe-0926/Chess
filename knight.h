@@ -3,8 +3,7 @@
 #include "chesspiece.h"
 
 class Knight : public ChessPiece {
-    Piece piece;
-public:
+  public:
     Knight(Piece);
     std::vector<chessmove> getAvalibleMoves(position, Board*) override;
     Piece getType() override;

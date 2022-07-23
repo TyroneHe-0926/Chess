@@ -3,9 +3,8 @@
 
 #include "chesspiece.h"
 
-class King : public ChessPiece {
-    Piece piece;
-public:
+class King : private ChessPiece {
+  public:
     King(Piece);
     std::vector<chessmove> getAvalibleMoves(position, Board*) override;
     Piece getType() override;

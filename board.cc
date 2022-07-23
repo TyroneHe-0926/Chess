@@ -5,7 +5,6 @@ bool Board::isWon(){
 }
 
 Board::Board(): grid{}, td{new TextDisplay}, checkmate{false} {
-    
 }
 
 Board::~Board(){
