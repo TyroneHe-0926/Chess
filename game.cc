@@ -35,9 +35,11 @@ void Game::play(){
         if(command == "move" && started){
             if(side){
                 nextmove = player2->getNextMove(b);
+                b->nextMove(nextmove);
             }
             else{
                 nextmove = player1->getNextMove(b);
+                b->nextMove(nextmove);
             }
             side = !side;
         }

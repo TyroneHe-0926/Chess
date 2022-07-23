@@ -7,15 +7,50 @@ Knight::Knight(Position p): ChessPiece(p) {
 
 std::vector<Position> Knight::getAvalibleMoves(Position pos, Board* board) {
     std::vector<Position> result;
-    int x = (int) pos.first, y = pos.second;
-    if(y+2 <= 8 && x+1 <= 8){ result.emplace_back((locationx)x+1, y+2); }
-    if(y+2 <= 8 && x-1 >= 0){ result.emplace_back((locationx)x-1, y+2); }
-    if(y-2 >= 0 && x+1 <= 8){ result.emplace_back((locationx)x+1, y-2); }
-    if(y-2 >= 0 && x-1 >= 0){ result.emplace_back((locationx)x-1, y-2); }
-    if(y+1 <= 8 && x+2 <= 8){ result.emplace_back((locationx)x+2, y+1); }
-    if(y+1 <= 8 && x-2 >= 0){ result.emplace_back((locationx)x-2, y+1); }
-    if(y-1 >= 0 && x+2 <= 8){ result.emplace_back((locationx)x+2, y-1); }
-    if(y-1 >= 0 && x-2 >= 0){ result.emplace_back((locationx)x-2, y-1); }
+    Position retpos;
+    int x = (int) pos.first;
+    int y = pos.second;
+
+    if(y+2 <= 8 && x+1 <= 8){
+        retpos.first = (locationx)(x+1);
+        retpos.second = y+2;
+        result.emplace_back(retpos); 
+    }
+    if(y+2 <= 8 && x-1 >= 0){ 
+        retpos.first = (locationx)(x-1);
+        retpos.second = y+2;
+        result.emplace_back(retpos); 
+    }
+    if(y-2 >= 0 && x+1 <= 8){ 
+        retpos.first = (locationx)(x+1);
+        retpos.second = y-2;
+        result.emplace_back(retpos); 
+    }
+    if(y-2 >= 0 && x-1 >= 0){ 
+        retpos.first = (locationx)(x-1);
+        retpos.second = y-2;
+        result.emplace_back(retpos); 
+    }
+    if(y+1 <= 8 && x+2 <= 8){ 
+        retpos.first = (locationx)(x+2);
+        retpos.second = y+1;
+        result.emplace_back(retpos); 
+    }
+    if(y+1 <= 8 && x-2 >= 0){ 
+        retpos.first = (locationx)(x-2);
+        retpos.second = y+1;
+        result.emplace_back(retpos);
+    }
+    if(y-1 >= 0 && x+2 <= 8){
+        retpos.first = (locationx)(x+2);
+        retpos.second = y-1;
+        result.emplace_back(retpos);
+    }
+    if(y-1 >= 0 && x-2 >= 0){ 
+        retpos.first = (locationx)(x-2);
+        retpos.second = y-1;
+        result.emplace_back(retpos);
+    }
     return result;
 }
 
