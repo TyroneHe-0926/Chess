@@ -4,8 +4,8 @@
 
 class Knight : public ChessPiece {
   public:
-    Knight(position);
-    std::vector<chessmove> getAvalibleMoves(position, Board*) override;
+    Knight(Position);
+    std::vector<ChessMove> getAvalibleMoves(Position, Board*) override;
     Piece getType() override;
     ~Knight(){};
 };

@@ -5,8 +5,8 @@
 
 class Rook : public ChessPiece {
   public:
-    Rook(position);
-    std::vector<chessmove> getAvalibleMoves(position, Board*) override;
+    Rook(Position);
+    std::vector<ChessMove> getAvalibleMoves(Position, Board*) override;
     Piece getType() override;
     ~Rook(){}
 };

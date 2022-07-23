@@ -1,10 +1,10 @@
 #include "king.h"
 
-King::King(position p): ChessPiece(p) {
+King::King(Position p): ChessPiece(p) {
     piece.first = PieceType::King;
 }
 
-std::vector<chessmove> King::getAvalibleMoves(position, Board*) {
+std::vector<ChessMove> King::getAvalibleMoves(Position, Board*) {
     return {};
 }
 

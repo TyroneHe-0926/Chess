@@ -1,10 +1,10 @@
 #include "pawn.h"
 
-Pawn::Pawn(position p): ChessPiece(p) {
+Pawn::Pawn(Position p): ChessPiece(p) {
     piece.first = PieceType::Pawn;
 }
 
-std::vector<chessmove> Pawn::getAvalibleMoves(position, Board*) {
+std::vector<ChessMove> Pawn::getAvalibleMoves(Position, Board*) {
     return {};
 }
 

@@ -38,7 +38,7 @@ void Game::initGame(){
 
 void Game::play(){
     string command;
-    chessmove nextmove;
+    ChessMove nextmove;
     while(cin>>command){
         if(command == "move"){
             if(side){

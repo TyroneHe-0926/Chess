@@ -6,12 +6,11 @@
 
 
 class Move : public Observer{
-    std::vector<moveinfo> history;
+    std::vector<MoveInfo> history;
     void pop();
   public:
-    chessmove getLastMove();
+    ChessMove getLastMove();
     void notify(Observer&);
-    void getSubType();
 };
 
 #endif

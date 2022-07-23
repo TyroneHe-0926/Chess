@@ -5,8 +5,8 @@
 
 class King : public ChessPiece {
   public:
-    King(position);
-    std::vector<chessmove> getAvalibleMoves(position, Board*) override;
+    King(Position);
+    std::vector<ChessMove> getAvalibleMoves(Position, Board*) override;
     Piece getType() override;
     ~King(){};
 };

@@ -9,9 +9,9 @@ class ChessPiece{
   protected:
     Piece piece;
   public:
-    virtual std::vector<chessmove> getAvalibleMoves(position, Board*) = 0;
+    virtual std::vector<ChessMove> getAvalibleMoves(Position, Board*) = 0;
     virtual Piece getType() = 0;
-    ChessPiece(position p);
+    ChessPiece(Position p);
     virtual ~ChessPiece(){};
 };
 

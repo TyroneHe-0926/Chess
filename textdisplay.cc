@@ -8,7 +8,7 @@ TextDisplay::TextDisplay(){
 }
 
 void TextDisplay::notify(Cell& c){
-    position temp = c.getCoords();
+    Position temp = c.getCoords();
     char intoDisp;
     switch(c.getType().first){
         case PieceType::Pawn: intoDisp = 'P';

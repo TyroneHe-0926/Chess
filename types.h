@@ -17,9 +17,9 @@ enum class PieceType{
 enum locationx{A = 1,B = 2,C = 3,D = 4,E = 5,F = 6,G = 7,H = 8};
 
 typedef std::pair<PieceType, bool> Piece;
-typedef std::pair<locationx, int> position;
-typedef std::pair<position, position> chessmove;
-typedef std::pair<chessmove, PieceType> moveinfo;
+typedef std::pair<locationx, int> Position;
+typedef std::pair<Position, Position> ChessMove;
+typedef std::pair<ChessMove, PieceType> MoveInfo;
 typedef std::pair<Observer*, Observer*> Observe;
 
 #endif

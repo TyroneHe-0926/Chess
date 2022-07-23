@@ -7,10 +7,10 @@ Human::Human(bool side) : side{side} {}
     
 bool Human::getSide() { return side; }
 
-chessmove Human::getNextMove(Board&){
-    position pos1, pos2;
+ChessMove Human::getNextMove(Board&){
+    Position pos1, pos2;
     string src, target;
-    chessmove result;
+    ChessMove result;
     cin>>src>>target;
     
     while((src.size() != 2 || target.size() != 2 ) && 

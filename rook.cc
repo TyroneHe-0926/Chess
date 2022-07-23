@@ -1,10 +1,10 @@
 #include "rook.h"
 
-Rook::Rook(position p): ChessPiece(p) {
+Rook::Rook(Position p): ChessPiece(p) {
     piece.first = PieceType::Rook;
 }
 
-std::vector<chessmove> Rook::getAvalibleMoves(position, Board*) {
+std::vector<ChessMove> Rook::getAvalibleMoves(Position, Board*) {
     return {};
 }
 

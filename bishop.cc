@@ -1,10 +1,10 @@
 #include "bishop.h"
 
-std::vector<chessmove> Bishop::getAvalibleMoves(position, Board*) {
+std::vector<ChessMove> Bishop::getAvalibleMoves(Position, Board*) {
     return {};
 }
 
-Bishop::Bishop(position p): ChessPiece(p) {
+Bishop::Bishop(Position p): ChessPiece(p) {
     piece.first = PieceType::Bishop;
 }
 

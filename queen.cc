@@ -1,10 +1,10 @@
 #include "queen.h"
 
-Queen::Queen(position p): ChessPiece(p) {
+Queen::Queen(Position p): ChessPiece(p) {
     piece.first = PieceType::Queen;
 }
 
-std::vector<chessmove> Queen::getAvalibleMoves(position, Board*) {
+std::vector<ChessMove> Queen::getAvalibleMoves(Position, Board*) {
     return {};
 }
 

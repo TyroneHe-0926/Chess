@@ -1,10 +1,10 @@
 #include "knight.h"
 
-Knight::Knight(position p): ChessPiece(p) {
+Knight::Knight(Position p): ChessPiece(p) {
     piece.first = PieceType::Knight;
 }
 
-std::vector<chessmove> Knight::getAvalibleMoves(position, Board*) {
+std::vector<ChessMove> Knight::getAvalibleMoves(Position, Board*) {
     return {};
 }
 

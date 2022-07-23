@@ -7,7 +7,7 @@
 #include "queen.h"
 #include "king.h"
 
-Cell::Cell(position Pos, std::shared_ptr<ChessPiece> a) : ob{}, obj{a}, Pos{Pos} {}
+Cell::Cell(Position Pos, std::shared_ptr<ChessPiece> a) : ob{}, obj{a}, Pos{Pos} {}
 
 void Cell::notifyObservers(){
     Cell temp{getCoords(), obj};
@@ -24,18 +24,18 @@ void Cell::setState(std::shared_ptr<ChessPiece>* next){
     notifyObservers();
 }
 
-position Cell::getCoords(){
+Position Cell::getCoords(){
     return Pos;
 }
 
 Piece Cell::getType(){
-    if(!obj){
+    if(obj){
         return obj->getType();
     }
     return {PieceType::Empty, false};
 }
 
-Cell::Cell(position Pos, Observe a): ob{}, obj{nullptr}, Pos{Pos} {
+Cell::Cell(Position Pos, Observe a): ob{}, obj{nullptr}, Pos{Pos} {
     attach(a.first);
     attach(a.second);
     switch(Pos.second){
