@@ -9,6 +9,7 @@ class Player {
 public:
     virtual bool getSide() = 0;
     virtual ChessMove getNextMove(Board*) = 0;
+    virtual ~Player() {};
 };
 
 #endif

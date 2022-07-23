@@ -9,6 +9,7 @@ public:
     Human(bool);
     bool getSide() override;
     ChessMove getNextMove(Board*) override;
+    ~Human(){};
 };
 
 #endif

@@ -30,9 +30,10 @@ void Game::play(){
                 player2 = new Computer{1, diff};
             }
             started = true;
-            cout<<b<<endl;
+            b = new Board{};
+            cout<<*b<<endl;
         }
-        if(command == "move" && started){
+        else if(command == "move" && started){
             if(side){
                 nextmove = player2->getNextMove(b);
                 b->nextMove(nextmove);
@@ -43,10 +44,10 @@ void Game::play(){
             }
             side = !side;
         }
-        else{
+        else if(command == "move" && !started){
             cout<<"Game is not initalized yet!"<<endl;
         }
-        if(command == "resign"){
+        else if(command == "resign"){
             if(side){
                 //player 1 wins
             }
@@ -54,11 +55,14 @@ void Game::play(){
                 //player 2 wins
             }
         }
-        if(command == "setup" && !started){
+        else if(command == "setup" && !started){
             b->init();
         }
-        else{
+        else if(command == "setup" && started){
             cout<<"No setup during a game!"<<endl;
         }
     }
+    delete b;
+    delete player1;
+    delete player2;
 }
