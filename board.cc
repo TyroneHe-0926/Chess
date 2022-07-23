@@ -12,6 +12,10 @@ Board::Board(): grid{}, td{new TextDisplay}, checkmate{false} {
     }
 }
 
+void Board::init(){
+
+}
+
 Board::~Board(){
     delete td;
 }
