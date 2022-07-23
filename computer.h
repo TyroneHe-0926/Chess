@@ -4,12 +4,13 @@
 #define COMPUTER_H_
 
 class Computer : public Player{
-    int side, difficulty;
+    bool side;
+    int difficulty;
 public:
-    Computer(int, int);
-    int getSide() override;
+    Computer(bool, int);
+    bool getSide() override;
     int getDiff();
-    std::pair<std::pair<char, int>, std::pair<char, int>> getNextMove();
+    move getNextMove() override;
 };
 
 #endif

@@ -4,12 +4,11 @@
 #define BISHOP_H_
 
 class Bishop : public ChessPiece{
-    PieceType chessType;
-    int side;
+    Piece piece;
 public:
-    Bishop(int, PieceType);
-    std::vector<std::pair<int, int>> getAvalibleMoves(std::pair<int, int>, Board&) override;
-    PieceType getType() override;
+    Bishop(Piece);
+    std::vector<move> getAvalibleMoves(position, Board&) override;
+    Piece getType() override;
 };
 
 #endif

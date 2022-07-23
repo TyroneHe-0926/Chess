@@ -4,10 +4,11 @@
 #define ROOK_H_
 
 class Rook : public ChessPiece {
-    std::string chessType;
+    Piece piece;
 public:
-    std::vector<std::pair<int, int>> getAvalibleMoves(std::pair<int, int>, Board&) override;
-    std::string getType() override;
+    Rook(Piece);
+    std::vector<move> getAvalibleMoves(position, Board&) override;
+    Piece getType() override;
 };
 
 #endif

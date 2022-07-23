@@ -1,13 +1,13 @@
 #include "computer.h"
 using namespace std;
 
-Computer::Computer(int side, int diff) : side{side}, difficulty{diff}{}
+Computer::Computer(bool side, int diff) : side{side}, difficulty{diff}{}
 
 int Computer::getDiff(){ return difficulty; }
 
-int Computer::getSide(){ return side; }
+bool Computer::getSide(){ return side; }
 
-pair<pair<char, int>, pair<char, int>> Computer::getNextMove(){
+move Computer::getNextMove(){
     pair<pair<char, int>, pair<char, int>> result;
     pair<char, int> inputs;
     pair<char, int> targets;

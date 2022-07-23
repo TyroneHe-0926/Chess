@@ -2,11 +2,11 @@
 #include <iostream>
 using namespace std;
 
-Human::Human(int side) : side{side} {}
+Human::Human(bool side) : side{side} {}
     
-int Human::getSide() { return side; }
+bool Human::getSide() { return side; }
 
-pair<pair<char, int>, pair<char, int>> Human::getNextMove(){
+move Human::getNextMove(){
     pair<pair<char, int>, pair<char, int>> result;
     pair<char, int> inputs;
     pair<char, int> targets;

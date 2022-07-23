@@ -4,11 +4,11 @@
 #define HUMAN_H_
 
 class Human : public Player{
-    int side;
+    bool side;
 public:
-    Human(int);
-    int getSide() override;
-    std::pair<std::pair<char, int>, std::pair<char, int>> getNextMove() override;
+    Human(bool);
+    bool getSide() override;
+    move getNextMove() override;
 };
 
 #endif

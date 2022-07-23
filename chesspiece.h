@@ -8,8 +8,8 @@
 
 class ChessPiece{
 public:
-    virtual std::vector<std::pair<int, int>> getAvalibleMoves(std::pair<int, int>, Board&) = 0;
-    virtual PieceType getType() = 0;
+    virtual std::vector<move> getAvalibleMoves(position, Board&) = 0;
+    virtual Piece getType() = 0;
 };
 
 #endif

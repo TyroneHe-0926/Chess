@@ -8,7 +8,7 @@
 
 class Game{
     Board b;
-    int side;
+    bool side;
     Player* player1;
     Player* player2;
   public:
