@@ -53,7 +53,7 @@ void Game::play(){
                 nextmove = player2->getNextMove(b);
                 bool valid = checkMove(b, nextmove, side);
                 while(!valid){
-g                    nextmove = player2->getNextMove(b);
+                    nextmove = player2->getNextMove(b);
                     valid = checkMove(b, nextmove, side);
                 }
             }
