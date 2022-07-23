@@ -1,6 +1,7 @@
 #ifndef TYPE_H_
 #define TYPE_H_
 #include <utility>
+#include <vector>
 
 class Observer;
 
@@ -21,5 +22,11 @@ typedef std::pair<locationx, int> Position;
 typedef std::pair<Position, Position> ChessMove;
 typedef std::pair<ChessMove, PieceType> MoveInfo;
 typedef std::pair<Observer*, Observer*> Observe;
+
+
+struct PossibleMoves{
+    Position start;
+    std::vector<Position> destination;
+};
 
 #endif
