@@ -34,6 +34,7 @@ void Game::initGame(){
             cout<<"Please initialize the game first!"<<endl;
         }
     }
+    cout<<b<<endl;
 }
 
 void Game::play(){

@@ -21,5 +21,5 @@ Board::~Board(){
 }
 
 std::ostream& operator<<(std::ostream& out, Board& pb){
-    return out << pb.td;
+    return out << *pb.td;
 }
