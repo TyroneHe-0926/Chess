@@ -1,6 +1,7 @@
 #include "game.h"
 #include <string>
 #include <iostream>
+#include "types.h"
 using namespace std;
 
 Game::Game() : side{0}{}
@@ -31,6 +32,33 @@ void Game::initGame(){
         }
         else{
             cout<<"Please initialize the game first!"<<endl;
+        }
+    }
+}
+
+void Game::play(){
+    string command;
+    chessmove nextmove;
+    while(cin>>command){
+        if(command == "move"){
+            if(side){
+                nextmove = player2->getNextMove(b);
+            }
+            else{
+                nextmove = player1->getNextMove(b);
+            }
+            side = !side;
+        }
+        if(command == "resign"){
+            if(side){
+                //player 1 wins
+            }
+            else{
+                //player 2 wins
+            }
+        }
+        if(command == "setup"){
+            b.init();
         }
     }
 }
