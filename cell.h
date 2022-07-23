@@ -16,7 +16,7 @@ class Cell{
     void attach(Observer*);                       //Observers should only be attached at initialization
     Cell(Position Pos, std::shared_ptr<ChessPiece> a);
   public:
-    void setState(std::shared_ptr<ChessPiece>*);  //Insert the new piece and return the old one
+    void setState(std::shared_ptr<ChessPiece>&);  //Insert the new piece and return the old one
     std::vector<Position> getAvailableMoves(Board*);
     Position getCoords();                         //Return the Coordinates of the cell
     Piece getType();                              //Return the piece information

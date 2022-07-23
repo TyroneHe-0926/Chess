@@ -1,4 +1,5 @@
 #include "board.h"
+#include "iostream"
 
 void Board::init(){
 
@@ -10,10 +11,9 @@ bool Board::isWon(){
 
 void Board::nextMove(ChessMove move){
     //should handle deleting killed cells
-    std::shared_ptr<ChessPiece> nextOccupant = nullptr;
-    std::shared_ptr<ChessPiece>* temp = &nextOccupant;
-    grid[8-move.first.second][((int)move.first.first)-1].setState(temp);
-    grid[8-move.second.second][((int)move.second.first)-1].setState(temp);
+    std::shared_ptr<ChessPiece> nextOccupant(nullptr);
+    grid[move.first.second-1][((int)move.first.first)-1].setState(nextOccupant);
+    grid[move.second.second-1][((int)move.second.first)-1].setState(nextOccupant);
 }
 
 Piece Board::getType(Position temp){

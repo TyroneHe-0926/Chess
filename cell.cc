@@ -19,8 +19,8 @@ void Cell::attach(Observer* obs){
     ob.push_back(obs);
 }
 
-void Cell::setState(std::shared_ptr<ChessPiece>* next){
-    obj.swap(*next);
+void Cell::setState(std::shared_ptr<ChessPiece>& next){
+    obj.swap(next);
     notifyObservers();
 }
 
