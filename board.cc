@@ -16,6 +16,22 @@ void Board::nextMove(ChessMove move){
     grid[8-move.second.second][((int)move.second.first)-1].setState(temp);
 }
 
+Piece Board::getType(Position temp){
+    return grid[8-temp.second][((int)temp.first)-1].getType();
+}
+
+std::vector<PossibleMoves> Board::getAllAvailableMoves(bool side, Board*b){
+    std::vector<PossibleMoves> list;
+    for(auto i: grid){
+        for(auto j: i){
+            if(j.getType().first != PieceType::Empty && j.getType().second == side){
+                list.push_back({j.getCoords(), j.getAvailableMoves(b)});
+            }
+        }
+    }
+    return list;
+}
+
 Board::Board(): grid{}, td{new TextDisplay}, gui{new GUI}, checkmate{false} {
     for(int i = 1; i <= 8; ++i){
         grid.push_back({Cell({A,i},{td,gui}), Cell({B,i},{td,gui}), 

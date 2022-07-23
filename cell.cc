@@ -24,6 +24,10 @@ void Cell::setState(std::shared_ptr<ChessPiece>* next){
     notifyObservers();
 }
 
+std::vector<Position> Cell::getAvailableMoves(Board*b){
+    return obj->getAvalibleMoves(this->getCoords(), b);
+}
+
 Position Cell::getCoords(){
     return Pos;
 }

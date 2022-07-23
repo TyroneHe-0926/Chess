@@ -6,6 +6,7 @@
 
 class Observer;
 class ChessPiece;
+class Board;
 
 class Cell{
     std::vector<Observer*> ob;                    //Pair of observers to notify
@@ -16,6 +17,7 @@ class Cell{
     Cell(Position Pos, std::shared_ptr<ChessPiece> a);
   public:
     void setState(std::shared_ptr<ChessPiece>*);  //Insert the new piece and return the old one
+    std::vector<Position> getAvailableMoves(Board*);
     Position getCoords();                         //Return the Coordinates of the cell
     Piece getType();                              //Return the piece information
     Cell(Position Pos, Observe a);                //ctor

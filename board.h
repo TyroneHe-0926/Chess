@@ -14,12 +14,12 @@ class Board{
     GUI* gui;
     bool checkmate;
   public:
-    void init();
+    void init();                //handles setup command
     bool isWon();
     void undoMove();
     void nextMove(ChessMove);
     Piece getType(Position);
-    std::vector<ChessMove> getMoveList(bool side);
+    std::vector<PossibleMoves> getAllAvailableMoves(bool, Board*);
     Board();
     ~Board();
     friend std::ostream& operator<<(std::ostream&, Board&);

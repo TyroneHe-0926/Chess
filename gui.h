@@ -5,6 +5,8 @@
 class GUI : public Observer{
   public:
     void notify(Cell&) override;
+    GUI();
+    virtual ~GUI(){};
 };
 
 #endif
