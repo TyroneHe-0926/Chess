@@ -8,6 +8,7 @@ class Computer : public Player{
 public:
     Computer(int, int);
     int getSide() override;
+    int getDiff();
     std::pair<std::pair<char, int>, std::pair<char, int>> getNextMove();
 };
 
