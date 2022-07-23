@@ -11,6 +11,7 @@ class Game{
     bool side;
     Player* player1;
     Player* player2;
+    int computer;
   public:
     Game();
     void play();

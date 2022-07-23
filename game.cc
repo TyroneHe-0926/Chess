@@ -4,7 +4,7 @@
 #include "types.h"
 using namespace std;
 
-Game::Game() : side{0}{}
+Game::Game() : b{nullptr}, side{0}, player1{nullptr}, player2{nullptr}, computer{0} {}
 
 bool checkMove(Board* b, ChessMove nextmove, bool side){
     Position dest = nextmove.second;
@@ -53,8 +53,7 @@ void Game::play(){
                 nextmove = player2->getNextMove(b);
                 bool valid = checkMove(b, nextmove, side);
                 while(!valid){
-                    cout<<"Invalid move, please try again"<<endl;
-                    nextmove = player2->getNextMove(b);
+g                    nextmove = player2->getNextMove(b);
                     valid = checkMove(b, nextmove, side);
                 }
             }
