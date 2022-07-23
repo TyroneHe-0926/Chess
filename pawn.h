@@ -1,12 +1,13 @@
-#include "chesspiece.h"
-
 #ifndef PAWN_H_
 #define PAWN_H_
+#include "chesspiece.h"
+
+
 class Pawn : public ChessPiece{
     Piece piece;
 public:
-    Pawn(Piece);
-    std::vector<chessmove> getAvalibleMoves(position, Board&) override;
+    Pawn(position);
+    std::vector<chessmove> getAvalibleMoves(position, Board*) override;
     Piece getType() override;
 };
 
