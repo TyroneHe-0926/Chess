@@ -36,12 +36,19 @@ void Game::play(){
         else if(command == "move" && started){
             if(side){
                 nextmove = player2->getNextMove(b);
-                b->nextMove(nextmove);
+                Position dest = nextmove.second;
+                vector<PossibleMoves> pm = b->getAllAvailableMoves(side, b);
+                for(auto m : pm){
+                    for(auto d : m.destination){
+                        if(dest.first == d.first && dest.second == d.second){
+                            b->nextMove(nextmove);
+                        }
+                    }
+                }
             }
             else{
                 nextmove = player1->getNextMove(b);
                 Position dest = nextmove.second;
-                cout<<"Destionation is: "<<dest.first<<" "<<dest.second<<endl;
                 vector<PossibleMoves> pm = b->getAllAvailableMoves(side, b);
                 for(auto m : pm){
                     for(auto d : m.destination){
