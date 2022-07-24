@@ -69,7 +69,6 @@ std::vector<Position> Knight::getAvalibleMoves(Position pos, Board* board) {
             result.emplace_back(retpos); 
         }
     }
-    cout<<result.size()<<endl;
     return result;
 }
 

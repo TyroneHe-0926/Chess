@@ -13,6 +13,8 @@ class ChessPiece{
     virtual Piece getType() = 0;
     ChessPiece(Position p);
     virtual ~ChessPiece(){};
+    static void checkDiag(Board*, std::vector<Position>&, Position);
+    static void checkRowCol(Board*, std::vector<Position>&, Position);
 };
 
 #endif

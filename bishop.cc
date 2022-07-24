@@ -1,7 +1,13 @@
 #include "bishop.h"
+#include <utility>
+#include "board.h"
+using namespace std;
 
-std::vector<Position> Bishop::getAvalibleMoves(Position, Board*) {
-    return {};
+std::vector<Position> Bishop::getAvalibleMoves(Position pos, Board* b) {
+    vector<Position> result;
+    //Bishops just need to check the diagnols
+    ChessPiece::checkDiag(b, result, pos);
+    return result;
 }
 
 Bishop::Bishop(Position p): ChessPiece(p) {
