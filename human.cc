@@ -57,14 +57,13 @@ ChessMove Human::getNextMove(Board* b){
     string src, target;
     ChessMove result;
     while(cin>>src>>target){
-        while((src.size() != 2 || target.size() != 2 ) || 
+        if((src.size() != 2 || target.size() != 2 ) || 
             !('@' < toupper(src.at(0)) && toupper(src.at(0)) < 'I' && 
             '@' < toupper(target.at(0)) && toupper(target.at(0)) < 'I')){
                 if(!cin){return result;}
                 cout<<"Invalid command. Should be of format 'move e2 e4'."<<endl;
                 cin >> src;
-                cin>>src>>target;
-                std::cout << src << " " << target << std::endl;
+                continue;
         }
         char cinx = toupper(src[0]), coutx = toupper(target[0]);
         locationx inx = charToX(cinx), outx = charToX(coutx);
@@ -76,6 +75,7 @@ ChessMove Human::getNextMove(Board* b){
 
         if(checkMove(b, result)){break;}
         cout << "Invalid move, try again\n";
+        cin >> src;
     }
     if(!cin.eof()){
         b->nextMove(result);
