@@ -13,9 +13,7 @@ std::vector<Position> Pawn::getAvalibleMoves(Position pos, Board* b) {
     int x = (int) pos.first;
     int y = pos.second;
     bool side = b->getType(pos).second;
-
-    cout<<x<<","<<y<<","<<side<<endl;
-
+    
     //for white player, pawn can only go up
     if(!side && y+1 <= 8){
         retpos.first = pos.first;
