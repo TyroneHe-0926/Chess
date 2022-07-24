@@ -17,7 +17,7 @@ void Board::nextMove(ChessMove move){
 }
 
 Piece Board::getType(Position temp){
-    return grid[8-temp.second][((int)temp.first)-1].getType();
+    return grid[temp.second-1][((int)temp.first)-1].getType();
 }
 
 std::vector<PossibleMoves> Board::getAllAvailableMoves(bool side, Board*b){
