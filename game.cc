@@ -6,24 +6,9 @@ using namespace std;
 
 Game::Game() : b{nullptr}, side{0}, player1{nullptr}, player2{nullptr}, computer{0} {}
 
-bool checkMove(Board* b, ChessMove nextmove, bool side){
-    Position dest = nextmove.second;
-    vector<PossibleMoves> pm = b->getAllAvailableMoves(side, b);
-    for(auto m : pm){
-        for(auto d : m.destination){
-            cout<<d.first<<", "<<d.second<<endl;
-            if(dest.first == d.first && dest.second == d.second){
-                b->nextMove(nextmove);
-                return true;
-            }
-        }
-    }
-    return false;
-}
 
 void Game::play(){
     string command, p1, p2;
-    ChessMove nextmove;
     bool started = false;
     int diff;
     while(cin>>command){
@@ -49,23 +34,8 @@ void Game::play(){
             cout<<*b<<endl;
         }
         else if(command == "move" && started){
-            if(side){
-                nextmove = player2->getNextMove(b);
-                bool valid = checkMove(b, nextmove, side);
-                while(!valid){
-                    nextmove = player2->getNextMove(b);
-                    valid = checkMove(b, nextmove, side);
-                }
-            }
-            else{
-                nextmove = player1->getNextMove(b);
-                bool valid = checkMove(b, nextmove, side);
-                while(!valid){
-                    cout<<"Invalid move, please try again"<<endl;
-                    nextmove = player1->getNextMove(b);
-                    valid = checkMove(b, nextmove, side);
-                }
-            }
+            if(side){player2->getNextMove(b);}
+            else{player1->getNextMove(b);}
             cout<<*b<<endl;
             side = !side;
             side ? cout << "Black's turn" << endl : cout << "White's turn" <<endl;
@@ -88,6 +58,12 @@ void Game::play(){
             cout<<"No setup during a game!"<<endl;
         }
     }
+    delete b;
+    delete player1;
+    delete player2;
+}
+
+Game::~Game(){
     delete b;
     delete player1;
     delete player2;

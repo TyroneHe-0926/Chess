@@ -13,8 +13,9 @@ class Game{
     Player* player2;
     int computer;
   public:
-    Game();
     void play();
+    Game();
+    ~Game();
 };
 
 
