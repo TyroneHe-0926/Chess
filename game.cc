@@ -36,6 +36,7 @@ void Game::play(){
         else if(command == "move" && started){
             if(side){player2->getNextMove(b);}
             else{player1->getNextMove(b);}
+            if(cin.eof()){break;}
             cout<<*b<<endl;
             side = !side;
             side ? cout << "Black's turn" << endl : cout << "White's turn" <<endl;
@@ -58,9 +59,6 @@ void Game::play(){
             cout<<"No setup during a game!"<<endl;
         }
     }
-    delete b;
-    delete player1;
-    delete player2;
 }
 
 Game::~Game(){

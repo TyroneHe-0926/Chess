@@ -43,7 +43,6 @@ bool Human::checkMove(Board* b, ChessMove nextmove){
     for(auto m : pm){
         if(m.start == nextmove.first){
             for(auto d: m.destination){
-                cout<<"Avalible moves at "<<d.first<<", "<<d.second<<endl;
                 if(d == nextmove.second){
                     return true;
                 }
@@ -57,17 +56,16 @@ ChessMove Human::getNextMove(Board* b){
     Position pos1, pos2;
     string src, target;
     ChessMove result;
-    while(true){
-        cin>>src>>target; 
+    while(cin>>src>>target){
         while((src.size() != 2 || target.size() != 2 ) || 
             !('@' < toupper(src.at(0)) && toupper(src.at(0)) < 'I' && 
             '@' < toupper(target.at(0)) && toupper(target.at(0)) < 'I')){
+                if(!cin){return result;}
                 cout<<"Invalid command. Should be of format 'move e2 e4'."<<endl;
                 cin >> src;
                 cin>>src>>target;
                 std::cout << src << " " << target << std::endl;
         }
-
         char cinx = toupper(src[0]), coutx = toupper(target[0]);
         locationx inx = charToX(cinx), outx = charToX(coutx);
 
@@ -79,6 +77,8 @@ ChessMove Human::getNextMove(Board* b){
         if(checkMove(b, result)){break;}
         cout << "Invalid move, try again\n";
     }
-    b->nextMove(result);
+    if(!cin.eof()){
+        b->nextMove(result);
+    }
     return result;
 }

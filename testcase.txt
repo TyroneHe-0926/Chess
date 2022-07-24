@@ -1,3 +1,2 @@
 game human human
-move b1 b3
-move b1 b3
+move
