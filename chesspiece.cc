@@ -44,7 +44,7 @@ void ChessPiece::checkDiag(Board* b, std::vector<Position>& result, Position pos
     }
 
     //diag check bottom right
-    for(int row = y-1, col = x+1; row >= 1 && col <= 8; ++row, --col){
+    for(int row = y-1, col = x+1; row >= 1 && col <= 8; --row, ++col){
         retpos.first = (locationx)(col);
         retpos.second = row;
         if(b->getType(retpos).first == PieceType::Empty){
