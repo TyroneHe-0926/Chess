@@ -40,8 +40,22 @@ void Game::play(){
         else if(command == "move" && started){
             if(side){
                 ChessMove theMove = player2->getNextMove(b);
+                if(theMove.second.second == -1){
+                    cout<<"Checkmate! Black player won!"<<endl;
+                    ++player2Score;
+                    started = false;
+                    continue;
+                }
             }
-            else{player1->getNextMove(b);}
+            else{
+                ChessMove theMove = player1->getNextMove(b);
+                if(theMove.second.second == -1){
+                    cout<<"Checkmate! White player won!"<<endl;
+                    ++player1Score;
+                    started = false;
+                    continue;
+                }
+            }
             if(cin.eof()){break;}
             cout<<*b<<endl;
             side = !side;

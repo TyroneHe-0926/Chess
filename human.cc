@@ -93,7 +93,8 @@ ChessMove Human::getNextMove(Board* b){
             side ? cout<<"White is in check"<<endl : cout<<"Black is in check"<<endl;
         }
         if(checkMate(b, this->side)){
-            return {};
+            ChessMove endGame = make_pair(make_pair(A, -1), make_pair(A, -1));
+            return endGame;
         }
     }
     return result;
