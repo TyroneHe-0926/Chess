@@ -12,10 +12,8 @@ class Board{
     std::vector<std::vector<Cell>> grid;
     TextDisplay* td;
     GUI* gui;
-    bool checkmate;
   public:
     void init();                //handles setup command
-    bool isWon();
     void undoMove();
     void nextMove(ChessMove);
     Piece getType(Position);

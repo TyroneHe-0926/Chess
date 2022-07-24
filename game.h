@@ -8,12 +8,13 @@
 
 class Game{
     Board *b;
-    bool side;
+    bool side, checkmate;
     Player* player1;
     Player* player2;
     int computer, player1Score, player2Score;
   public:
     void play();
+    bool isWon();
     Game();
     ~Game();
 };

@@ -4,8 +4,12 @@
 #include "types.h"
 using namespace std;
 
-Game::Game() : b{nullptr}, side{0}, player1{nullptr}, player2{nullptr}, computer{0}, player1Score{0}, player2Score{0} {}
+Game::Game() : b{nullptr}, side{0}, player1{nullptr}, player2{nullptr}, 
+                computer{0}, player1Score{0}, player2Score{0}, checkmate{false} {}
 
+bool Game::isWon(){
+    return checkmate;
+}
 
 void Game::play(){
     string command, p1, p2;
@@ -34,7 +38,9 @@ void Game::play(){
             cout<<*b<<endl;
         }
         else if(command == "move" && started){
-            if(side){player2->getNextMove(b);}
+            if(side){
+                ChessMove theMove = player2->getNextMove(b);
+            }
             else{player1->getNextMove(b);}
             if(cin.eof()){break;}
             cout<<*b<<endl;

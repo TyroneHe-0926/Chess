@@ -5,10 +5,6 @@ void Board::init(){
 
 }
 
-bool Board::isWon(){
-    return checkmate;
-}
-
 void Board::nextMove(ChessMove move){
     //should handle deleting killed cells
     std::shared_ptr<ChessPiece> nextOccupant(nullptr);
@@ -32,7 +28,7 @@ std::vector<PossibleMoves> Board::getAllAvailableMoves(bool side, Board*b){
     return list;
 }
 
-Board::Board(): grid{}, td{new TextDisplay}, gui{new GUI}, checkmate{false} {
+Board::Board(): grid{}, td{new TextDisplay}, gui{new GUI} {
     for(int i = 1; i <= 8; ++i){
         grid.push_back({Cell({A,i},{td,gui}), Cell({B,i},{td,gui}), 
             Cell({C,i},{td,gui}), Cell({D,i},{td,gui}), Cell({E,i},{td,gui}), 
