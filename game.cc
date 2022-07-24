@@ -4,7 +4,7 @@
 #include "types.h"
 using namespace std;
 
-Game::Game() : b{nullptr}, side{0}, player1{nullptr}, player2{nullptr}, computer{0} {}
+Game::Game() : b{nullptr}, side{0}, player1{nullptr}, player2{nullptr}, computer{0}, player1Score{0}, player2Score{0} {}
 
 
 void Game::play(){
@@ -46,11 +46,14 @@ void Game::play(){
         }
         else if(command == "resign"){
             if(side){
-                //player 1 wins
+                ++player1Score;
+                cout<<"White player won! Start a new game by using command 'game'! "<<endl;
             }
             else{
-                //player 2 wins
+                ++player2Score;
+                cout<<"Black player won! Start a new game by using command 'game'! "<<endl;
             }
+            started = false;
         }
         else if(command == "setup" && !started){
             b->init();
@@ -59,6 +62,9 @@ void Game::play(){
             cout<<"No setup during a game!"<<endl;
         }
     }
+    cout<<"Final Score"<<endl;
+    cout<<"White: "<<player1Score<<endl;
+    cout<<"Black: "<<player2Score<<endl;
 }
 
 Game::~Game(){
