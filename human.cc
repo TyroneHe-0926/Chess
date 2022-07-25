@@ -8,7 +8,7 @@ Human::Human(bool side) : side{side} {}
 bool Human::getSide() { return side; }
 
 bool Human::checkMove(Board* b, ChessMove nextmove){
-    vector<PossibleMoves> pm = b->getAllAvailableMoves(side, b);
+    vector<PossibleMoves> pm = b->getAllAvailableMoves(side);
     for(auto m : pm){
         if(m.start == nextmove.first){
             for(auto d: m.destination){
@@ -44,7 +44,7 @@ ChessMove Human::getNextMove(Board* b){
 
         if(checkMove(b, result)){   
             b->nextMove(result);
-            if(inCheck(b, this->side)){
+            if(b->inCheck(this->side)){
                 cout<<"You cannot move that piece, your king is currently in check!"<<endl;
                 ChessMove original = make_pair(pos2, pos1);
                 b->nextMove(original);
@@ -58,7 +58,7 @@ ChessMove Human::getNextMove(Board* b){
     }
     if(!cin.eof()){
         //check if your opponent is currently in check after the move
-        if(inCheck(b, !(this->side))){
+        if(b->inCheck(!(this->side))){
             side ? cout<<"White is in check"<<endl : cout<<"Black is in check"<<endl;
         }
         if(checkMate(b, this->side)){

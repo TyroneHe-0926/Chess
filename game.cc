@@ -1,6 +1,7 @@
 #include "game.h"
 #include <string>
 #include <iostream>
+#include <sstream>
 #include "types.h"
 using namespace std;
 
@@ -15,8 +16,18 @@ void Game::play(){
     string command, p1, p2;
     bool started = false;
     int diff;
+    int setup = 0;
     while(cin>>command){
         if(command == "game"){
+            if(setup == 0){
+                std::stringstream defaultinput;
+                defaultinput << "+ r a8 + n b8 + b c8 + q d8 + k e8 + b f8 + n g8 + r h8 ";
+                defaultinput << "+ p a7 + p b7 + p c7 + p d7 + p e7 + p f7 + p g7 + p h7 ";
+                defaultinput << "+ P a2 + P b2 + P c2 + P d2 + P e2 + P f2 + P g2 + P h2 ";
+                defaultinput << "+ R a1 + N b1 + B c1 + Q d1 + K e1 + B f1 + N g1 + R h1 ";
+                defaultinput << "done ";
+                b->init(defaultinput, 1);
+            }
             cin>>p1>>p2;
             if(p1 == "human"){
                 player1 = new Human{0};
@@ -79,7 +90,8 @@ void Game::play(){
             started = false;
         }
         else if(command == "setup" && !started){
-            b->init(std::cin);
+            side = b->init(std::cin, 0);
+            setup = 1;
         }
         else if(command == "setup" && started){
             cout<<"No setup during a game!"<<endl;

@@ -10,7 +10,6 @@ public:
     virtual bool getSide() = 0;
     virtual ChessMove getNextMove(Board*) = 0;
     virtual ~Player() {};
-    bool inCheck(Board* b, bool side);
     bool checkMate(Board* b, bool side);
 };
 

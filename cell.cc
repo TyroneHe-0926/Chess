@@ -6,13 +6,14 @@
 #include "bishop.h"
 #include "queen.h"
 #include "king.h"
+#include <iostream>
 
 Cell::Cell(Position Pos, std::shared_ptr<ChessPiece> a) : ob{}, obj{a}, Pos{Pos} {}
 
 void Cell::notifyObservers(){
     Cell temp{getCoords(), obj};
     ob[0]->notify(temp);
-    ob[0]->notify(temp);
+    ob[1]->notify(temp);
 }
 
 void Cell::attach(Observer* obs){

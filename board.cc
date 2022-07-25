@@ -8,48 +8,43 @@
 #include "queen.h"
 #include "king.h"
 
-bool Board::init(std::istream& in){
-    std::shared_ptr<ChessPiece> clear(nullptr);
+bool Board::init(std::istream& in, bool def){
     std::string arg1, arg2, arg3;
     bool start = 0;
     bool valid = 0;
-    std::string wking, bking;
     do{
         in >> arg1;
+        if(in.eof()){break;}
         if(arg1 == "+"){
-            if(in >> arg2 >> arg3){
-                if(arg2.size() == 1 && (toupper(arg2[0]) == 'P' ||
-                        toupper(arg2[0]) == 'R' || toupper(arg2[0]) == 'N' || 
-                        toupper(arg2[0]) == 'B' || toupper(arg2[0]) == 'Q' || 
-                        toupper(arg2[0]) == 'K') && arg3.size() == 2 && '@' < toupper(arg3[0]) && 
-                        toupper(arg3[0]) < 'I' && '0' < arg3[1] && arg3[1] < ':'){
-                    std::shared_ptr<ChessPiece> addtoboard;
-                    switch(toupper(arg2[0])){
-                        case 'P':
-                            addtoboard = std::make_shared<Pawn>(Pawn(isupper(arg2[0])));
-                            break;
-                        case 'R':
-                            addtoboard = std::make_shared<Rook>(Rook(isupper(arg2[0])));
-                            break;
-                        case 'N':
-                            addtoboard = std::make_shared<Knight>(Knight(isupper(arg2[0])));
-                            break;
-                        case 'B':
-                            addtoboard = std::make_shared<Bishop>(Bishop(isupper(arg2[0])));
-                            break;
-                        case 'Q':
-                            addtoboard = std::make_shared<Queen>(Queen(isupper(arg2[0])));
-                            break;
-                        case 'K':
-                            addtoboard = std::make_shared<King>(King(isupper(arg2[0])));
-                            break;
-                    }
-                    grid[arg3[0]-'A'][arg3[1] - '1'].setState(addtoboard);
-                    if(arg3 == wking){wking.clear();}
-                    else if(arg3 == bking){bking.clear();}
+            if(in >> arg2 >> arg3 && arg2.size() == 1 && (toupper(arg2[0]) == 'P' ||
+                    toupper(arg2[0]) == 'R' || toupper(arg2[0]) == 'N' || 
+                    toupper(arg2[0]) == 'B' || toupper(arg2[0]) == 'Q' || 
+                    toupper(arg2[0]) == 'K') && arg3.size() == 2 && '@' < toupper(arg3[0]) && 
+                    toupper(arg3[0]) < 'I' && '0' < arg3[1] && arg3[1] < ':'){
+                std::shared_ptr<ChessPiece> addtoboard;
+                switch(toupper(arg2[0])){
+                    case 'P':
+                        addtoboard = std::make_shared<Pawn>(Pawn(islower(arg2[0])));
+                        break;
+                    case 'R':
+                        addtoboard = std::make_shared<Rook>(Rook(islower(arg2[0])));
+                        break;
+                    case 'N':
+                        addtoboard = std::make_shared<Knight>(Knight(islower(arg2[0])));
+                        break;
+                    case 'B':
+                        addtoboard = std::make_shared<Bishop>(Bishop(islower(arg2[0])));
+                        break;
+                    case 'Q':
+                        addtoboard = std::make_shared<Queen>(Queen(islower(arg2[0])));
+                        break;
+                    case 'K':
+                        addtoboard = std::make_shared<King>(King(islower(arg2[0])));
+                        break;
                 }
-                else{
-                    std::cout << "Invalid input, should follow format + K e1" << std::endl;
+                grid[arg3[1] - '1'][toupper(arg3[0])-'A'].setState(addtoboard);
+                if(def == 0){
+                    std::cout << *td;
                 }
             }
             else{
@@ -60,9 +55,13 @@ bool Board::init(std::istream& in){
             in >> arg2;
             if(arg2.size() == 2 && '@' < toupper(arg2[0]) && 
                     toupper(arg2[0]) < 'I' && '0' < arg2[1] && arg2[1] < ':'){
-                grid[arg2[0]-'A'][arg2[1] - '1'].setState(clear);
-                if(arg2 == wking){wking.clear();}
-                else if(arg2 == bking){bking.clear();}
+                if(grid[arg2[1] - '1'][toupper(arg2[0])-'A'].getType().first != PieceType::Empty){
+                    std::shared_ptr<ChessPiece> nullchess(nullptr);
+                    grid[arg2[1] - '1'][toupper(arg2[0])-'A'].setState(nullchess);
+                    if(def == 0){
+                        std::cout << *td;
+                    }
+                }
             }
             else{
                 std::cout << "Invalid input, should follow format - e1" << std::endl;
@@ -80,11 +79,58 @@ bool Board::init(std::istream& in){
                 std::cout << "Invalid input, should be either \"= white\" or \"= black\"" << std::endl;
             }
         }
-        if(!wking.empty() && !bking.empty()){
+        else if(arg1 == "done"){
             valid = 1;
+            for(int i = 0; i < 8; i++){
+                if(grid[0][i].getType().first == PieceType::Pawn || 
+                        grid[7][i].getType().first == PieceType::Pawn){
+                    std::cout << "Invalid setup, pawns are not allowed in the first and last rows" << std::endl;
+                    valid = 0;
+                }
+            }
+            int numWKing = 0;
+            int numBKing = 0;
+            for(auto i: grid){
+                for(auto j: i){
+                    Piece k = j.getType();
+                    if(k.first == PieceType::King && k.second == 0){
+                        numWKing++;
+                    }
+                    else if(k.first == PieceType::King && k.second == 1){
+                        numBKing++;
+                    }
+                }
+            }
+            if(numBKing != 1 || numWKing != 1){
+                std::cout << "Invalid setup, there must be 1 king for each side" << std::endl;
+                valid = 0;
+            }
+            if(inCheck(0) || inCheck(1)){
+                std::cout << "Invalid setup, a king is in check" << std::endl;
+                valid = 0;
+            }
+            
         }
-    }while(arg1 != "done" && valid == 1);
+        else{std::cout << "Invalid command" << std::endl;}
+    }while(arg1 != "done" || valid == 0);
     return start;
+}
+
+bool Board::inCheck(bool side){
+    //get all the possible moves the opponent can make
+    std::vector<PossibleMoves> pm = getAllAvailableMoves(!side);
+
+    //check if this side is in check
+    for(auto m : pm){
+        if(getType(m.start).second != side){
+            for(auto d : m.destination){
+                if(getType(d).first == PieceType::King){
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
 }
 
 void Board::nextMove(ChessMove move){
@@ -98,12 +144,12 @@ Piece Board::getType(Position temp){
     return grid[temp.second-1][((int)temp.first)-1].getType();
 }
 
-std::vector<PossibleMoves> Board::getAllAvailableMoves(bool side, Board*b){
+std::vector<PossibleMoves> Board::getAllAvailableMoves(bool side){
     std::vector<PossibleMoves> list;
     for(auto i: grid){
         for(auto j: i){
             if(j.getType().first != PieceType::Empty && j.getType().second == side){
-                list.push_back({j.getCoords(), j.getAvailableMoves(b)});
+                list.push_back({j.getCoords(), j.getAvailableMoves(this)});
             }
         }
     }

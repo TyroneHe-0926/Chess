@@ -13,11 +13,12 @@ class Board{
     TextDisplay* td;
     GUI* gui;
   public:
-    bool init(std::istream& in);               //handles setup command
+    bool init(std::istream& in, bool);               //handles setup command
+    bool inCheck(bool side);
     void undoMove();
     void nextMove(ChessMove);
     Piece getType(Position);
-    std::vector<PossibleMoves> getAllAvailableMoves(bool, Board*);
+    std::vector<PossibleMoves> getAllAvailableMoves(bool);
     Board();
     ~Board();
     friend std::ostream& operator<<(std::ostream&, Board&);

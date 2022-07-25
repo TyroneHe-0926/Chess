@@ -8,7 +8,7 @@ int Computer::getDiff(){ return difficulty; }
 bool Computer::getSide(){ return side; }
 
 ChessMove Computer::getNextMove(Board* b){
-    vector<PossibleMoves> pm = b->getAllAvailableMoves(side, b);
+    vector<PossibleMoves> pm = b->getAllAvailableMoves(side);
     int l = pm.size();
     ChessMove result;
     if(difficulty == 1){
