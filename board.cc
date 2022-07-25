@@ -175,5 +175,6 @@ Board::~Board(){
 }
 
 std::ostream& operator<<(std::ostream& out, Board& pb){
+    pb.gui->update();
     return out << *pb.td;
 }
