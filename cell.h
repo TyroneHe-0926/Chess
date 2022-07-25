@@ -20,7 +20,7 @@ class Cell{
     std::vector<Position> getAvailableMoves(Board*);
     Position getCoords();                         //Return the Coordinates of the cell
     Piece getType();                              //Return the piece information
-    Cell(Position Pos, Observe a);                //ctor
+    Cell(Position Pos, std::shared_ptr<ChessPiece> ,Observe a);                //ctor
     ~Cell();                                      //dtor
 };
 

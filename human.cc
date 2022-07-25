@@ -7,37 +7,6 @@ Human::Human(bool side) : side{side} {}
     
 bool Human::getSide() { return side; }
 
-locationx charToX(char src){
-    locationx ret;
-    switch(src){
-        case 'A':
-            ret = A;
-            break;
-        case 'B':
-            ret = B;
-            break;
-        case 'C':
-            ret = C;
-            break;
-        case 'D':
-            ret = D;
-            break;
-        case 'E':
-            ret = E;
-            break;
-        case 'F':
-            ret = F;
-            break;
-        case 'G':
-            ret = G;
-            break;
-        case 'H':
-            ret = H;
-            break;
-    }
-    return ret;
-}
-
 bool Human::checkMove(Board* b, ChessMove nextmove){
     vector<PossibleMoves> pm = b->getAllAvailableMoves(side, b);
     for(auto m : pm){

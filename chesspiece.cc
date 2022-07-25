@@ -1,13 +1,8 @@
 #include "chesspiece.h"
 #include "board.h"
 
-ChessPiece::ChessPiece(Position p) {
-    if(p.second == 1 || p.second == 2){
-        piece.second = false;
-    }
-    else{
-        piece.second = true;
-    }
+ChessPiece::ChessPiece(bool side) {
+    piece.second = side;
 };
 
 void ChessPiece::checkDiag(Board* b, std::vector<Position>& result, Position pos){

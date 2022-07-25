@@ -13,7 +13,7 @@ class Board{
     TextDisplay* td;
     GUI* gui;
   public:
-    void init();                //handles setup command
+    bool init(std::istream& in);               //handles setup command
     void undoMove();
     void nextMove(ChessMove);
     Piece getType(Position);

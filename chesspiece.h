@@ -11,7 +11,7 @@ class ChessPiece{
   public:
     virtual std::vector<Position> getAvalibleMoves(Position, Board*) = 0;
     virtual Piece getType() = 0;
-    ChessPiece(Position p);
+    ChessPiece(bool side);
     virtual ~ChessPiece(){};
     static void checkDiag(Board*, std::vector<Position>&, Position);
     static void checkRowCol(Board*, std::vector<Position>&, Position);

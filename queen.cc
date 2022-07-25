@@ -3,7 +3,7 @@
 #include "board.h"
 using namespace std;
 
-Queen::Queen(Position p): ChessPiece(p) {
+Queen::Queen(bool side): ChessPiece(side) {
     piece.first = PieceType::Queen;
 }
 

@@ -1,8 +1,90 @@
+#include <string>
 #include "board.h"
 #include "iostream"
+#include "pawn.h"
+#include "rook.h"
+#include "knight.h"
+#include "bishop.h"
+#include "queen.h"
+#include "king.h"
 
-void Board::init(){
-
+bool Board::init(std::istream& in){
+    std::shared_ptr<ChessPiece> clear(nullptr);
+    std::string arg1, arg2, arg3;
+    bool start = 0;
+    bool valid = 0;
+    std::string wking, bking;
+    do{
+        in >> arg1;
+        if(arg1 == "+"){
+            if(in >> arg2 >> arg3){
+                if(arg2.size() == 1 && (toupper(arg2[0]) == 'P' ||
+                        toupper(arg2[0]) == 'R' || toupper(arg2[0]) == 'N' || 
+                        toupper(arg2[0]) == 'B' || toupper(arg2[0]) == 'Q' || 
+                        toupper(arg2[0]) == 'K') && arg3.size() == 2 && '@' < toupper(arg3[0]) && 
+                        toupper(arg3[0]) < 'I' && '0' < arg3[1] && arg3[1] < ':'){
+                    std::shared_ptr<ChessPiece> addtoboard;
+                    switch(toupper(arg2[0])){
+                        case 'P':
+                            addtoboard = std::make_shared<Pawn>(Pawn(isupper(arg2[0])));
+                            break;
+                        case 'R':
+                            addtoboard = std::make_shared<Rook>(Rook(isupper(arg2[0])));
+                            break;
+                        case 'N':
+                            addtoboard = std::make_shared<Knight>(Knight(isupper(arg2[0])));
+                            break;
+                        case 'B':
+                            addtoboard = std::make_shared<Bishop>(Bishop(isupper(arg2[0])));
+                            break;
+                        case 'Q':
+                            addtoboard = std::make_shared<Queen>(Queen(isupper(arg2[0])));
+                            break;
+                        case 'K':
+                            addtoboard = std::make_shared<King>(King(isupper(arg2[0])));
+                            break;
+                    }
+                    grid[arg3[0]-'A'][arg3[1] - '1'].setState(addtoboard);
+                    if(arg3 == wking){wking.clear();}
+                    else if(arg3 == bking){bking.clear();}
+                }
+                else{
+                    std::cout << "Invalid input, should follow format + K e1" << std::endl;
+                }
+            }
+            else{
+                std::cout << "Invalid input, should follow format + K e1" << std::endl;
+            }
+        }
+        else if(arg1 == "-"){
+            in >> arg2;
+            if(arg2.size() == 2 && '@' < toupper(arg2[0]) && 
+                    toupper(arg2[0]) < 'I' && '0' < arg2[1] && arg2[1] < ':'){
+                grid[arg2[0]-'A'][arg2[1] - '1'].setState(clear);
+                if(arg2 == wking){wking.clear();}
+                else if(arg2 == bking){bking.clear();}
+            }
+            else{
+                std::cout << "Invalid input, should follow format - e1" << std::endl;
+            }
+        }
+        else if(arg1 == "="){
+            in >> arg2;
+            if(arg2 == "white"){
+                start = 0;
+            }
+            else if(arg2 == "black"){
+                start = 1;
+            }
+            else{
+                std::cout << "Invalid input, should be either \"= white\" or \"= black\"" << std::endl;
+            }
+        }
+        if(!wking.empty() && !bking.empty()){
+            valid = 1;
+        }
+    }while(arg1 != "done" && valid == 1);
+    return start;
 }
 
 void Board::nextMove(ChessMove move){
@@ -30,9 +112,14 @@ std::vector<PossibleMoves> Board::getAllAvailableMoves(bool side, Board*b){
 
 Board::Board(): grid{}, td{new TextDisplay}, gui{new GUI} {
     for(int i = 1; i <= 8; ++i){
-        grid.push_back({Cell({A,i},{td,gui}), Cell({B,i},{td,gui}), 
-            Cell({C,i},{td,gui}), Cell({D,i},{td,gui}), Cell({E,i},{td,gui}), 
-            Cell({F,i},{td,gui}), Cell({G,i},{td,gui}), Cell({H,i},{td,gui})});
+        grid.push_back({Cell({A,i},nullptr,{td,gui}),
+            Cell({B,i},nullptr,{td,gui}), 
+            Cell({C,i},nullptr,{td,gui}), 
+            Cell({D,i},nullptr,{td,gui}), 
+            Cell({E,i},nullptr,{td,gui}), 
+            Cell({F,i},nullptr,{td,gui}),
+            Cell({G,i},nullptr,{td,gui}), 
+            Cell({H,i},nullptr,{td,gui})});
     }
 }
 

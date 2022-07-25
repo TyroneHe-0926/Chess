@@ -4,8 +4,8 @@
 #include "types.h"
 using namespace std;
 
-Game::Game() : b{nullptr}, side{0}, player1{nullptr}, player2{nullptr}, 
-                computer{0}, player1Score{0}, player2Score{0}, checkmate{false} {}
+Game::Game() : b{new Board()}, side{0}, checkmate{false}, player1{nullptr}, player2{nullptr}, 
+                computer{0}, player1Score{0}, player2Score{0} {}
 
 bool Game::isWon(){
     return checkmate;
@@ -34,7 +34,6 @@ void Game::play(){
                 player2 = new Computer{1, diff};
             }
             started = true;
-            b = new Board{};
             cout<<*b<<endl;
         }
         else if(command == "move" && started){
@@ -44,6 +43,8 @@ void Game::play(){
                     cout<<"Checkmate! Black player won!"<<endl;
                     ++player2Score;
                     started = false;
+                    delete b;
+                    b = new Board();
                     continue;
                 }
             }
@@ -53,6 +54,8 @@ void Game::play(){
                     cout<<"Checkmate! White player won!"<<endl;
                     ++player1Score;
                     started = false;
+                    delete b;
+                    b = new Board();
                     continue;
                 }
             }
@@ -76,7 +79,7 @@ void Game::play(){
             started = false;
         }
         else if(command == "setup" && !started){
-            b->init();
+            b->init(std::cin);
         }
         else if(command == "setup" && started){
             cout<<"No setup during a game!"<<endl;

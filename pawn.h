@@ -4,7 +4,7 @@
 
 class Pawn : public ChessPiece{
   public:
-    Pawn(Position);
+    Pawn(bool);
     std::vector<Position> getAvalibleMoves(Position, Board*) override;
     Piece getType() override;
     ~Pawn(){};

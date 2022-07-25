@@ -10,7 +10,7 @@ std::vector<Position> Bishop::getAvalibleMoves(Position pos, Board* b) {
     return result;
 }
 
-Bishop::Bishop(Position p): ChessPiece(p) {
+Bishop::Bishop(bool side): ChessPiece(side) {
     piece.first = PieceType::Bishop;
 }
 

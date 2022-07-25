@@ -29,4 +29,6 @@ struct PossibleMoves{
     std::vector<Position> destination;
 };
 
+locationx charToX(char src);
+
 #endif

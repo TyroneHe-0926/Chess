@@ -3,7 +3,7 @@
 #include "board.h"
 using namespace std;
 
-Pawn::Pawn(Position p): ChessPiece(p) {
+Pawn::Pawn(bool side): ChessPiece(side) {
     piece.first = PieceType::Pawn;
 }
 

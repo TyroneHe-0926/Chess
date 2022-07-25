@@ -3,7 +3,7 @@
 #include "board.h"
 using namespace std;
 
-Knight::Knight(Position p): ChessPiece(p) {
+Knight::Knight(bool side): ChessPiece(side) {
     piece.first = PieceType::Knight;
 }
 
