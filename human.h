@@ -10,6 +10,7 @@ public:
     bool getSide() override;
     bool checkMove(Board* b, ChessMove nextmove);
     ChessMove getNextMove(Board*) override;
+    PlayerType getPlayerType() override;
     ~Human(){};
 };
 

@@ -11,6 +11,7 @@ public:
     bool getSide() override;
     int getDiff();
     ChessMove getNextMove(Board*) override;
+    PlayerType getPlayerType() override;
     ~Computer(){};
 };
 

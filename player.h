@@ -11,6 +11,7 @@ public:
     virtual ChessMove getNextMove(Board*) = 0;
     virtual ~Player() {};
     bool checkMate(Board* b, bool side);
+    virtual PlayerType getPlayerType() = 0;
 };
 
 #endif

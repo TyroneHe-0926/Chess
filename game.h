@@ -8,10 +8,11 @@
 
 class Game{
     Board *b;
-    bool side, checkmate;
+    bool side, checkmate, started;
     Player* player1;
     Player* player2;
     int computer, player1Score, player2Score;
+    void endGame();
   public:
     void play();
     bool isWon();

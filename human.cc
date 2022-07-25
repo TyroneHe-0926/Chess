@@ -7,6 +7,8 @@ Human::Human(bool side) : side{side} {}
     
 bool Human::getSide() { return side; }
 
+PlayerType Human::getPlayerType(){ return human; }
+
 bool Human::checkMove(Board* b, ChessMove nextmove){
     vector<PossibleMoves> pm = b->getAllAvailableMoves(side);
     for(auto m : pm){

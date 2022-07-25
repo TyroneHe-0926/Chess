@@ -5,16 +5,29 @@
 #include "types.h"
 using namespace std;
 
-Game::Game() : b{new Board()}, side{0}, checkmate{false}, player1{nullptr}, player2{nullptr}, 
-                computer{0}, player1Score{0}, player2Score{0} {}
+Game::Game() : b{new Board()}, side{0}, checkmate{false}, started{false}, player1{nullptr}, player2{nullptr}, 
+                computer{0}, player1Score{0}, player2Score{0}{}
 
 bool Game::isWon(){
     return checkmate;
 }
 
+void Game::endGame(){
+    if(side){
+        cout<<"Checkmate! Black player won!"<<endl;
+        ++player2Score;
+    }
+    else{
+        cout<<"Checkmate! White player won!"<<endl;
+        ++player1Score;
+    }
+    started = false;
+    delete b;
+    b = new Board{};
+}
+
 void Game::play(){
     string command, p1, p2;
-    bool started = false;
     int diff;
     int setup = 0;
     while(cin>>command){
@@ -33,7 +46,7 @@ void Game::play(){
                 player1 = new Human{0};
             }
             else{
-                diff = p1.back();
+                diff = p1.back() - '0';
                 player1 = new Computer{0, diff};
             }
 
@@ -41,60 +54,62 @@ void Game::play(){
                 player2 = new Human{1};
             }
             else{
-                diff = p2.back();
+                diff = p2.back() - '0';
                 player2 = new Computer{1, diff};
             }
             started = true;
             cout<<*b<<endl;
         }
-        else if(command == "move" && started){
-            if(side){
-                ChessMove theMove = player2->getNextMove(b);
-                if(theMove.second.second == -1){
-                    cout<<"Checkmate! Black player won!"<<endl;
-                    ++player2Score;
-                    started = false;
-                    delete b;
-                    b = new Board();
-                    continue;
+        if(started){
+            if(command == "move"){
+                if(!side && player1->getPlayerType() == PlayerType::computer){
+                    cout<<"White computer is making a move"<<endl;
+                    ChessMove theMove = player1->getNextMove(b);
+                    if(theMove.second.second == -1){
+                        endGame();
+                        continue;
+                    }
                 }
-            }
-            else{
-                ChessMove theMove = player1->getNextMove(b);
-                if(theMove.second.second == -1){
-                    cout<<"Checkmate! White player won!"<<endl;
-                    ++player1Score;
-                    started = false;
-                    delete b;
-                    b = new Board();
-                    continue;
+                if(side && player2->getPlayerType() == PlayerType::computer){
+                    cout<<"Black computer is making a move"<<endl;
+                    ChessMove theMove = player2->getNextMove(b);
+                    if(theMove.second.second == -1){
+                        endGame();
+                        continue;
+                    }
                 }
+                if(side && player2->getPlayerType() == PlayerType::human){
+                    ChessMove theMove = player2->getNextMove(b);
+                    if(theMove.second.second == -1){
+                        endGame();
+                        continue;
+                    }
+                }
+                if(!side && player1->getPlayerType() == PlayerType::human){
+                    ChessMove theMove = player1->getNextMove(b);
+                    if(theMove.second.second == -1){
+                        endGame();
+                        continue;
+                    }
+                }
+                if(cin.eof()){break;}
+                cout<<*b<<endl;
+                side = !side;
+                side ? cout << "Black's turn" << endl : cout << "White's turn" <<endl;
             }
-            if(cin.eof()){break;}
-            cout<<*b<<endl;
-            side = !side;
-            side ? cout << "Black's turn" << endl : cout << "White's turn" <<endl;
+            if(command == "resign"){
+                endGame();
+            }
+            if(command == "setup"){
+                cout<<"No setup during a game!"<<endl;
+            }
         }
-        else if(command == "move" && !started){
+        else if(command == "move"){
             cout<<"Game is not initalized yet!"<<endl;
         }
-        else if(command == "resign"){
-            if(side){
-                ++player1Score;
-                cout<<"White player won! Start a new game by using command 'game'! "<<endl;
-            }
-            else{
-                ++player2Score;
-                cout<<"Black player won! Start a new game by using command 'game'! "<<endl;
-            }
-            started = false;
-        }
-        else if(command == "setup" && !started){
+        else if(command == "setup"){
             side = b->init(std::cin, 0);
             setup = 1;
-        }
-        else if(command == "setup" && started){
-            cout<<"No setup during a game!"<<endl;
         }
     }
     cout<<"Final Score"<<endl;
