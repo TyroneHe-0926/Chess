@@ -19,8 +19,13 @@ std::vector<Position> Pawn::getAvalibleMoves(Position pos, Board* b) {
         retpos.first = pos.first;
         retpos.second = y+1;
         //can only foward 1 cell if that cell is empty
+        //also can only move forward by 2 cells if it hasn't moved yet
         if(b->getType(retpos).first == PieceType::Empty){
             result.emplace_back(retpos);
+            retpos.second = y + 2;
+            if(moves == 0 && b->getType(retpos).first == PieceType::Empty){
+                result.emplace_back(retpos);
+            }
         }
         //can only capture diagnolly
         if(x+1 <= 8){
@@ -48,6 +53,10 @@ std::vector<Position> Pawn::getAvalibleMoves(Position pos, Board* b) {
         //can only move foward 1 cell if that cell is empty
         if(b->getType(retpos).first == PieceType::Empty){
             result.emplace_back(retpos);
+            retpos.second = y - 2;
+            if(moves == 0 && b->getType(retpos).first == PieceType::Empty){
+                result.emplace_back(retpos);
+            }
         }
         //can only capture diagnolly
         if(x+1 <= 8){

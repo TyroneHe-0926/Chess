@@ -1,9 +1,17 @@
 #include "chesspiece.h"
 #include "board.h"
 
-ChessPiece::ChessPiece(bool side) {
+ChessPiece::ChessPiece(bool side): moves{0} {
     piece.second = side;
 };
+
+void ChessPiece::moved(){
+    moves++;
+}
+
+void ChessPiece::undo(){
+    moves--;
+}
 
 void ChessPiece::checkDiag(Board* b, std::vector<Position>& result, Position pos){
     int x = (int) pos.first;

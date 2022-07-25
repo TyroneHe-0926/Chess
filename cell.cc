@@ -21,6 +21,9 @@ void Cell::attach(Observer* obs){
 }
 
 void Cell::setState(std::shared_ptr<ChessPiece>& next){
+    if(obj){
+        obj->moved();
+    }
     obj.swap(next);
     notifyObservers();
 }
