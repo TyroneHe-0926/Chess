@@ -24,6 +24,7 @@ void Game::endGame(){
     started = false;
     delete b;
     b = new Board{};
+    side = 0;
 }
 
 void Game::play(){
@@ -42,6 +43,8 @@ void Game::play(){
                 b->init(defaultinput, 1);
             }
             cin>>p1>>p2;
+            if(player1){ delete player1; }
+            if(player2){ delete player2; }
             if(p1 == "human"){
                 player1 = new Human{0};
             }
