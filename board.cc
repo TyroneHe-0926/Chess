@@ -136,12 +136,33 @@ bool Board::inCheck(bool side){
 void Board::nextMove(ChessMove move){
     //should handle deleting killed cells
     std::shared_ptr<ChessPiece> nextOccupant(nullptr);
+    list.AddMove(move, getType(move.first), getType(move.second));
     grid[move.first.second-1][((int)move.first.first)-1].setState(nextOccupant);
     grid[move.second.second-1][((int)move.second.first)-1].setState(nextOccupant);
 }
 
+void Board::testMove(ChessMove move){
+    grid[move.first.second-1][((int)move.first.first)-1].test();
+    nextMove(move);
+    list.getLastMove();
+}
+
+void Board::badMove(ChessMove move){
+    grid[move.second.second-1][((int)move.second.first)-1].test();
+    nextMove(move);
+    list.getLastMove();
+}
+
+ChessMove Board::lastMove(){
+    return list.getLastMove();
+}
+
 Piece Board::getType(Position temp){
     return grid[temp.second-1][((int)temp.first)-1].getType();
+}
+
+int Board::moved(Position temp){
+    return grid[temp.second-1][((int)temp.first)-1].moved();
 }
 
 std::vector<PossibleMoves> Board::getAllAvailableMoves(bool side){

@@ -27,13 +27,21 @@ std::vector<Position> Pawn::getAvalibleMoves(Position pos, Board* b) {
                 result.emplace_back(retpos);
             }
         }
-        //can only capture diagnolly
+        //can only capture diagonally
         if(x+1 <= 8){
             retpos.first = (locationx)(x+1);
             retpos.second = y+1;
             if(b->getType(retpos).first != PieceType::Empty && 
             b->getType(retpos).second != b->getType(pos).second){
                 result.emplace_back(retpos);
+            }
+            retpos.second = 5;
+            if(y == 5 && b->getType(retpos).first == PieceType::Pawn && b->moved(retpos) == 1){
+                ChessMove lastmove = {{(locationx)x, 7}, {(locationx)x, 5}};
+                if(lastmove == b->lastMove()){
+                    retpos.second = 6;
+                    result.emplace_back(retpos);
+                }
             }
         }
         if(x-1 >= 1){
@@ -42,6 +50,14 @@ std::vector<Position> Pawn::getAvalibleMoves(Position pos, Board* b) {
             if(b->getType(retpos).first != PieceType::Empty && 
             b->getType(retpos).second != b->getType(pos).second){
                 result.emplace_back(retpos);
+            }
+            retpos.second = 5;
+            if(y == 5 && b->getType(retpos).first == PieceType::Pawn && b->moved(retpos) == 1){
+                ChessMove lastmove = {{(locationx)x, 7}, {(locationx)x, 5}};
+                if(lastmove == b->lastMove()){
+                    retpos.second = 6;
+                    result.emplace_back(retpos);
+                }
             }
         }
     }
@@ -58,13 +74,21 @@ std::vector<Position> Pawn::getAvalibleMoves(Position pos, Board* b) {
                 result.emplace_back(retpos);
             }
         }
-        //can only capture diagnolly
+        //can only capture diagonally
         if(x+1 <= 8){
             retpos.first = (locationx)(x+1);
             retpos.second = y-1;
             if(b->getType(retpos).first != PieceType::Empty && 
             b->getType(retpos).second != b->getType(pos).second){
                 result.emplace_back(retpos);
+            }
+            retpos.second = 4;
+            if(y == 4 && b->getType(retpos).first == PieceType::Pawn && b->moved(retpos) == 1){
+                ChessMove lastmove = {{(locationx)x, 2}, {(locationx)x, 4}};
+                if(lastmove == b->lastMove()){
+                    retpos.second = 3;
+                    result.emplace_back(retpos);
+                }
             }
         }
         if(x-1 >= 1){
@@ -73,6 +97,14 @@ std::vector<Position> Pawn::getAvalibleMoves(Position pos, Board* b) {
             if(b->getType(retpos).first != PieceType::Empty && 
             b->getType(retpos).second != b->getType(pos).second){
                 result.emplace_back(retpos);
+            }
+            retpos.second = 4;
+            if(y == 4 && b->getType(retpos).first == PieceType::Pawn && b->moved(retpos) == 1){
+                ChessMove lastmove = {{(locationx)x, 2}, {(locationx)x, 4}};
+                if(lastmove == b->lastMove()){
+                    retpos.second = 3;
+                    result.emplace_back(retpos);
+                }
             }
         }
     }

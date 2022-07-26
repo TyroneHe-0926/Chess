@@ -13,6 +13,10 @@ void ChessPiece::undo(){
     moves--;
 }
 
+int ChessPiece::move(){
+    return moves;
+}
+
 void ChessPiece::checkDiag(Board* b, std::vector<Position>& result, Position pos){
     int x = (int) pos.first;
     int y = pos.second;

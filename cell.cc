@@ -8,7 +8,8 @@
 #include "king.h"
 #include <iostream>
 
-Cell::Cell(Position Pos, std::shared_ptr<ChessPiece> a) : ob{}, obj{a}, Pos{Pos} {}
+Cell::Cell(Position Pos, std::shared_ptr<ChessPiece> a) : ob{}, obj{a}, 
+                testobj{nullptr}, Pos{Pos} {}
 
 void Cell::notifyObservers(){
     Cell temp{getCoords(), obj};
@@ -41,6 +42,20 @@ Piece Cell::getType(){
         return obj->getType();
     }
     return {PieceType::Empty, false};
+}
+
+int Cell::moved(){
+    if(obj){
+        return obj->move();
+    }
+    return 0;
+}
+
+void Cell::test(){
+    std::shared_ptr<ChessPiece> temp(nullptr);
+    temp = obj;
+    testobj = temp;
+
 }
 
 Cell::Cell(Position Pos, std::shared_ptr<ChessPiece> p, Observe a): ob{}, obj{p}, Pos{Pos} {

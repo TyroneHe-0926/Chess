@@ -17,6 +17,7 @@ class ChessPiece{
     static void checkDiag(Board*, std::vector<Position>&, Position);
     static void checkRowCol(Board*, std::vector<Position>&, Position);
     void moved();
+    int move();
     void undo();
 };
 

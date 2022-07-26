@@ -2,15 +2,16 @@
 #define MOVE_H_
 #include <vector>
 #include "types.h"
-#include "observer.h"
 
-
-class Move : public Observer{
+class Move{
     std::vector<MoveInfo> history;
     void pop();
   public:
     ChessMove getLastMove();
-    void notify(Observer&);
+    ChessMove readLastMove();
+    void AddMove(ChessMove, Piece, Piece);
+    Move(){};
+    ~Move(){};
 };
 
 #endif

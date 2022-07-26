@@ -12,12 +12,17 @@ class Board{
     std::vector<std::vector<Cell>> grid;
     TextDisplay* td;
     GUI* gui;
+    Move list;
   public:
     bool init(std::istream& in, bool);               //handles setup command
     bool inCheck(bool side);
     void undoMove();
     void nextMove(ChessMove);
+    void testMove(ChessMove);
+    void badMove(ChessMove);
+    ChessMove lastMove();
     Piece getType(Position);
+    int moved(Position);
     std::vector<PossibleMoves> getAllAvailableMoves(bool);
     Board();
     ~Board();
