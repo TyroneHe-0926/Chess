@@ -8,8 +8,6 @@ class Computer : public Player{
     int difficulty;
 public:
     Computer(bool, int);
-    bool getSide() override;
-    int getDiff();
     ChessMove getNextMove(Board*) override;
     PlayerType getPlayerType() override;
     ~Computer(){};
