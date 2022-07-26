@@ -11,8 +11,9 @@ class Game{
     bool side, checkmate, started;
     Player* player1;
     Player* player2;
-    int computer, player1Score, player2Score;
-    void endGame();
+    int computer;
+    float player1Score, player2Score;
+    void endGame(char);
   public:
     void play();
     bool isWon();

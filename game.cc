@@ -12,20 +12,28 @@ bool Game::isWon(){
     return checkmate;
 }
 
-void Game::endGame(){
-    if(side){
-        cout<<"Checkmate! Black player won!"<<endl;
-        ++player2Score;
+void Game::endGame(char status){
+    if(status == 'g'){
+        if(side){
+            cout<<"Checkmate! Black player won!"<<endl;
+            ++player2Score;
+        }
+        else{
+            cout<<"Checkmate! White player won!"<<endl;
+            ++player1Score;
+        }
     }
-    else{
-        cout<<"Checkmate! White player won!"<<endl;
-        ++player1Score;
+    if(status == 's'){
+        cout<<"Draw game!"<<endl;
+        player1Score+=0.5;
+        player2Score+=0.5;
     }
     started = false;
     delete b;
     b = new Board{};
     side = 0;
 }
+
 
 void Game::play(){
     string command, p1, p2;
@@ -69,7 +77,11 @@ void Game::play(){
                     cout<<"White computer is making a move"<<endl;
                     ChessMove theMove = player1->getNextMove(b);
                     if(theMove.second.second == -1){
-                        endGame();
+                        endGame('g');
+                        continue;
+                    }
+                    if(theMove.second.second == -2){
+                        endGame('s');
                         continue;
                     }
                 }
@@ -77,21 +89,33 @@ void Game::play(){
                     cout<<"Black computer is making a move"<<endl;
                     ChessMove theMove = player2->getNextMove(b);
                     if(theMove.second.second == -1){
-                        endGame();
+                        endGame('g');
+                        continue;
+                    }
+                    if(theMove.second.second == -2){
+                        endGame('s');
                         continue;
                     }
                 }
                 if(side && player2->getPlayerType() == PlayerType::human){
                     ChessMove theMove = player2->getNextMove(b);
                     if(theMove.second.second == -1){
-                        endGame();
+                        endGame('g');
+                        continue;
+                    }
+                    if(theMove.second.second == -2){
+                        endGame('s');
                         continue;
                     }
                 }
                 if(!side && player1->getPlayerType() == PlayerType::human){
                     ChessMove theMove = player1->getNextMove(b);
                     if(theMove.second.second == -1){
-                        endGame();
+                        endGame('g');
+                        continue;
+                    }
+                    if(theMove.second.second == -2){
+                        endGame('s');
                         continue;
                     }
                 }
@@ -101,7 +125,7 @@ void Game::play(){
                 side ? cout << "Black's turn" << endl : cout << "White's turn" <<endl;
             }
             if(command == "resign"){
-                endGame();
+                endGame('g');
             }
             if(command == "setup"){
                 cout<<"No setup during a game!"<<endl;

@@ -23,11 +23,20 @@ bool Human::checkMove(Board* b, ChessMove nextmove){
     return false;
 }
 
+bool Human::checkStale(Board* b){
+    vector<PossibleMoves> pm = b->getAllAvailableMoves(side);
+    return pm.empty();
+}
+
 ChessMove Human::getNextMove(Board* b){
     Position pos1, pos2;
     string src, target;
     ChessMove result;
     while(cin>>src>>target){
+        if(checkStale(b)){
+            ChessMove staleGame = make_pair(make_pair(A, -2), make_pair(A, -2));
+            return staleGame;
+        }
         if((src.size() != 2 || target.size() != 2 ) || 
             !('@' < toupper(src.at(0)) && toupper(src.at(0)) < 'I' && 
             '@' < toupper(target.at(0)) && toupper(target.at(0)) < 'I')){
