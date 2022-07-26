@@ -10,8 +10,21 @@ bool Computer::getSide(){ return side; }
 
 PlayerType Computer::getPlayerType(){ return computer; }
 
+bool checkEmpty(vector<PossibleMoves> pm){
+    for(auto m : pm){
+        if(!m.destination.empty()){
+            return false;
+        }
+    }
+    return true;
+}
 //helper function that returns a random move from move list
 ChessMove randomMove(vector<PossibleMoves> pm){
+    //if no avalible moves are left, game is stale
+    if(checkEmpty(pm)){
+        ChessMove staleGame = make_pair(make_pair(A, -2), make_pair(A, -2));
+        return staleGame;
+    }
     ChessMove result;
     int listLength = pm.size();
     int randomMove =  rand()%listLength;
@@ -175,15 +188,17 @@ ChessMove getLevel4Move(vector<PossibleMoves> pm, Board* b, bool side){
 
     //first lets check if there is a valuable piece we could both capture and avoid getting captured
     if(!lvl4MoveList.empty()){
-        result.first = lvl4MoveList[0].start;
-        result.second = lvl4MoveList[0].destination[0];
+        result.first = lvl4MoveList[lvl4MoveList.size()-1].start;
+        vector<Position> dest = lvl4MoveList[lvl4MoveList.size()-1].destination;
+        result.second = dest[dest.size()-1];
     }
     else {
         //if not we choose to capture the most valuable piece
         lvl4MoveList = getLevel4MoveList(pm, b, side);
         if(!lvl4MoveList.empty()){
-            result.first = lvl4MoveList[0].start;
-            result.second = lvl4MoveList[0].destination[0];
+            result.first = lvl4MoveList[lvl4MoveList.size()-1].start;
+            vector<Position> dest = lvl4MoveList[lvl4MoveList.size()-1].destination;
+            result.second = dest[dest.size()-1];
         }
         else{
             //if not even that we go with level 3's logic
@@ -238,6 +253,11 @@ ChessMove Computer::getNextMove(Board* b){
         result = getLevel4Move(pmList, b, side);
     }
 
+    if(result.second.second == -2){
+        ChessMove staleGame = make_pair(make_pair(A, -2), make_pair(A, -2));
+        return staleGame;
+    }
+    
     //use our algorithm according to diff level to calculate the result and return
     b->nextMove(result, true);
 
