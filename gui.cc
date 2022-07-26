@@ -8,7 +8,7 @@
 #include <thread>
 
 void GUI::notify(Cell&c){
-    /*if(updates == 0){
+    if(updates == 0){
         drawBoard();
     }
     updates++;
@@ -48,11 +48,11 @@ void GUI::notify(Cell&c){
         if(c.getType().second == true){outcol = {(char)255,(char)255,(char)255};}
         else{outcol = {(char)0, (char)0, (char)0};}
     }
-    std::this_thread::sleep_for(std::chrono::milliseconds(500));*/
+    //std::this_thread::sleep_for(std::chrono::milliseconds(500));
 }
 
 void GUI::drawBoard(){
-    /*s.draw_rect(0,0, dispsize, dispsize, dark);
+    s.draw_rect(0,0, dispsize, dispsize, dark);
     int square = dispsize/9;
     int start = square/2;
     for(int i = 0; i < 8; i++){
@@ -62,24 +62,24 @@ void GUI::drawBoard(){
                     square, square, light);
             }
         }
-    }*/
+    }
 }
 
 
 void GUI::update(){
-    /*updates = 0;
-    s.update();*/
+    updates = 0;
+    s.update();
 }
 
-GUI::GUI(): /*s{Screen(dispsize,dispsize,"Chess")},*/ updates{0}{
-    /*s.add_img("Pawn", "images/BPawn.png");
+GUI::GUI(): s{Screen(dispsize,dispsize,"Chess")}, updates{0}{
+    s.add_img("Pawn", "images/BPawn.png");
     s.add_img("Rook", "images/rook.png");
     s.add_img("Knight", "images/knight.png");
     s.add_img("Bishop", "images/bishop.png");
     s.add_img("Queen", "images/queen.png");
     s.add_img("King", "images/king.png");
     drawBoard();
-    s.update();*/
+    s.update();
     //255,228,181
 };
 
