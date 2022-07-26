@@ -13,6 +13,8 @@ class Board{
     TextDisplay* td;
     GUI* gui;
     Move list;
+    void enPassant(ChessMove);
+    void castling(ChessMove);
   public:
     bool init(std::istream& in, bool);               //handles setup command
     bool inCheck(bool side);

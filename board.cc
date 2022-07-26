@@ -133,35 +133,57 @@ bool Board::inCheck(bool side){
     return false;
 }
 
+
+void Board::enPassant(ChessMove move){
+    //ensure that this is only triggered if the source piece is a pawn, the destination is diagonal,
+    //and the destination is empty
+    std::shared_ptr<ChessPiece> clearpawn(nullptr);
+    Piece a = grid[move.first.second-1][((int)move.first.first)-1].getType();
+    Piece dest = grid[move.second.second-1][((int)move.second.first)-1].getType();
+    Position s = move.first;
+    Position d = move.second;
+    if(a.first == PieceType::Pawn && dest.first == PieceType::Empty 
+            && (s.second+1 == d.second || s.second-1 == d.second)
+            && (s.first+1 == d.first || s.first-1 == d.first)){
+        Piece b;
+        if(a.second){
+            b = grid[move.second.second][((int)move.second.first)-1].getType();
+            if(b.first == PieceType::Pawn){
+                grid[move.second.second][((int)move.second.first)-1].setState(clearpawn);
+            }
+        }
+        else{
+            b = grid[move.second.second-2][((int)move.second.first)-1].getType();
+            if(b.first == PieceType::Pawn){
+                grid[move.second.second-2][((int)move.second.first)-1].setState(clearpawn);
+            }
+        }
+    }
+}
+
+
+void Board::castling(ChessMove move){
+    std::shared_ptr<ChessPiece> nextOccupant(nullptr);
+    if(move.second.first+2 == move.first.first){
+        grid[move.first.second-1][0].setState(nextOccupant);
+        grid[move.first.second-1][3].setState(nextOccupant);
+    }
+    else if(move.second.first-2 == move.first.first){
+        grid[move.first.second-1][7].setState(nextOccupant);
+        grid[move.first.second-1][5].setState(nextOccupant);
+    }
+    
+}
+
 void Board::nextMove(ChessMove move, bool update){
     //should handle deleting killed cells
     std::shared_ptr<ChessPiece> nextOccupant(nullptr);
     if(update){
         list.AddMove(move, getType(move.first), getType(move.second));
         //en passant
-        //ensure that this is only triggered if the source piece is a pawn, the destination is diagonal,
-        //and the destination is empty
-        std::shared_ptr<ChessPiece> clearpawn(nullptr);
-        Piece a = grid[move.first.second-1][((int)move.first.first)-1].getType();
-        Piece dest = grid[move.second.second-1][((int)move.second.first)-1].getType();
-        Position s = move.first;
-        Position d = move.second;
-        if(a.first == PieceType::Pawn && dest.first == PieceType::Empty 
-                && (s.second+1 == d.second || s.second-1 == d.second)
-                && (s.first+1 == d.first || s.first-1 == d.first)){
-            Piece b;
-            if(a.second){
-                b = grid[move.second.second][((int)move.second.first)-1].getType();
-                if(b.first == PieceType::Pawn){
-                    grid[move.second.second][((int)move.second.first)-1].setState(clearpawn);
-                }
-            }
-            else{
-                b = grid[move.second.second-2][((int)move.second.first)-1].getType();
-                if(b.first == PieceType::Pawn){
-                    grid[move.second.second-2][((int)move.second.first)-1].setState(clearpawn);
-                }
-            }
+        enPassant(move);
+        if(grid[move.first.second-1][((int)move.first.first)-1].getType().first == PieceType::King){
+            castling(move);
         }
     }
     grid[move.first.second-1][((int)move.first.first)-1].setState(nextOccupant);

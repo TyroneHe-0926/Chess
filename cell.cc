@@ -24,13 +24,6 @@ void Cell::attach(Observer* obs){
 void Cell::setState(std::shared_ptr<ChessPiece>& next){
     if(obj){
         obj->moved();
-        std::string input;
-        if((Pos.second == 8 || Pos.second == 1 )&& obj->getType().first == PieceType::Pawn){
-            std::cin >> input;
-        }
-        while(input.size() > 1){
-
-        }
     }
     obj.swap(next);
     notifyObservers();
