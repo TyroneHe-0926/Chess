@@ -38,7 +38,7 @@ void Game::play(){
     int diff;
     int setup = 0;
     while(cin>>command){
-        if(command == "game" && !started){
+        if(started == false && command == "game"){
             if(setup == 0){
                 std::stringstream defaultinput;
                 defaultinput << "+ r a8 + n b8 + b c8 + q d8 + k e8 + b f8 + n g8 + r h8 ";
@@ -81,7 +81,7 @@ void Game::play(){
             started = true;
             cout<<*b<<endl;
         }
-        if(started){
+        else if(started){
             if(command == "move"){
                 if(!side && player1->getPlayerType() == PlayerType::computer){
                     cout<<"White computer is making a move"<<endl;

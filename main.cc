@@ -3,7 +3,7 @@
 #include "game.h"
 #include "sdl_wrap.h"
 
-//SDL_Runner r;
+SDL_Runner r;
 
 int main(){
     std::srand(std::time(0));
