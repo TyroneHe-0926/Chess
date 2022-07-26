@@ -7,7 +7,6 @@ class Human : public Player{
     bool side;
 public:
     Human(bool);
-    bool getSide() override;
     bool checkMove(Board* b, ChessMove nextmove);
     ChessMove getNextMove(Board*) override;
     PlayerType getPlayerType() override;

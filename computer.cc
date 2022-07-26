@@ -4,10 +4,6 @@ using namespace std;
 
 Computer::Computer(bool side, int diff) : side{side}, difficulty{diff}{}
 
-int Computer::getDiff(){ return difficulty; }
-
-bool Computer::getSide(){ return side; }
-
 PlayerType Computer::getPlayerType(){ return computer; }
 
 bool checkEmpty(vector<PossibleMoves> pm){
@@ -257,7 +253,7 @@ ChessMove Computer::getNextMove(Board* b){
         ChessMove staleGame = make_pair(make_pair(A, -2), make_pair(A, -2));
         return staleGame;
     }
-    
+
     //use our algorithm according to diff level to calculate the result and return
     b->nextMove(result, true);
 
