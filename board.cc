@@ -256,14 +256,14 @@ void Board::promote(Position p, char c){
 
 Board::Board(): grid{}, td{new TextDisplay}, gui{new GUI} {
     for(int i = 1; i <= 8; ++i){
-        grid.push_back({Cell({A,i},nullptr,{td,gui}),
-            Cell({B,i},nullptr,{td,gui}), 
-            Cell({C,i},nullptr,{td,gui}), 
-            Cell({D,i},nullptr,{td,gui}), 
-            Cell({E,i},nullptr,{td,gui}), 
-            Cell({F,i},nullptr,{td,gui}),
-            Cell({G,i},nullptr,{td,gui}), 
-            Cell({H,i},nullptr,{td,gui})});
+        grid.push_back({Cell({A,i},nullptr,td),
+            Cell({B,i},nullptr,td), 
+            Cell({C,i},nullptr,td), 
+            Cell({D,i},nullptr,td), 
+            Cell({E,i},nullptr,td), 
+            Cell({F,i},nullptr,td),
+            Cell({G,i},nullptr,td), 
+            Cell({H,i},nullptr,td)});
     }
 }
 
@@ -273,6 +273,6 @@ Board::~Board(){
 }
 
 std::ostream& operator<<(std::ostream& out, Board& pb){
-    pb.gui->update();
+    pb.gui->update(pb.td);
     return out << *pb.td;
 }

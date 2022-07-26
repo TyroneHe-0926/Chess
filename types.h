@@ -22,7 +22,6 @@ typedef std::pair<PieceType, bool> Piece;
 typedef std::pair<locationx, int> Position;
 typedef std::pair<Position, Position> ChessMove;
 typedef std::pair<ChessMove, Piece> MoveInfo;
-typedef std::pair<Observer*, Observer*> Observe;
 
 
 struct PossibleMoves{

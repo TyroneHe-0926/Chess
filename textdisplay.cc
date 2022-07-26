@@ -31,6 +31,10 @@ void TextDisplay::notify(Cell& c){
     display[8-temp.second][((int)temp.first)-1] = intoDisp;
 }
 
+char TextDisplay::atPos(int i, int j){
+    return display.at(i).at(j);
+}
+
 std::ostream &operator<<(std::ostream& out, const TextDisplay& ptd){
     int k = 8;
     for(auto i: ptd.display){

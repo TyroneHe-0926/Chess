@@ -9,6 +9,7 @@ class TextDisplay : public Observer{
   public:
     void notify(Cell&) override;
     friend std::ostream& operator<<(std::ostream&, const TextDisplay&);
+    char atPos(int, int);
     TextDisplay();
     virtual ~TextDisplay(){};
 };

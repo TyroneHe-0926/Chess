@@ -25,7 +25,7 @@ class Cell{
     void movent();
     void test();
     void undo();
-    Cell(Position Pos, std::shared_ptr<ChessPiece> ,Observe a);                //ctor
+    Cell(Position Pos, std::shared_ptr<ChessPiece> ,Observer* a);                //ctor
     ~Cell();                                      //dtor
 };
 

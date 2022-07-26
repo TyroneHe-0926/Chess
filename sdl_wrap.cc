@@ -79,7 +79,7 @@ void Screen::draw_img(std::string key, int x, int y) {
 }
 
 void Screen::update() {
-  //SDL_RenderClear(render);
+  SDL_RenderClear(render);
   for (auto &r : rects) {
     SDL_SetRenderDrawColor(render, r.c.r, r.c.g, r.c.b, SDL_ALPHA_OPAQUE);
     SDL_RenderFillRect(render, &r.rect);

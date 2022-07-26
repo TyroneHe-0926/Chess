@@ -14,7 +14,6 @@ Cell::Cell(Position Pos, std::shared_ptr<ChessPiece> a) : ob{}, obj{a},
 void Cell::notifyObservers(){
     Cell temp{getCoords(), obj};
     ob[0]->notify(temp);
-    ob[1]->notify(temp);
 }
 
 void Cell::attach(Observer* obs){
@@ -68,9 +67,8 @@ void Cell::undo(){
     notifyObservers();
 }
 
-Cell::Cell(Position Pos, std::shared_ptr<ChessPiece> p, Observe a): ob{}, obj{p}, Pos{Pos} {
-    attach(a.first);
-    attach(a.second);
+Cell::Cell(Position Pos, std::shared_ptr<ChessPiece> p, Observer* a): ob{}, obj{p}, Pos{Pos} {
+    attach(a);
     notifyObservers();
 }
 
