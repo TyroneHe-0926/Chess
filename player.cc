@@ -28,3 +28,16 @@ bool Player::checkMate(Board* b, bool side){
     }
     return true;
 }
+
+bool Player::checkStale(Board* b, bool side){
+    vector<PossibleMoves> myMoves = b->getAllAvailableMoves(side);
+    for(auto myMove : myMoves){
+        for(auto d : myMove.destination){
+            //if we can get to a king, that means we are not staled
+            if(b->getType(d).first == PieceType::King){
+                return false;
+            }
+        }
+    }
+    return true;
+}

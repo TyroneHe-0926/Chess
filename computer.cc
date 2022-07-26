@@ -31,6 +31,29 @@ ChessMove getLevel1Move(vector<PossibleMoves> pm){
     return randomMove(pm);
 }
 
+//helper function for getting a move that checks the opponents king
+ChessMove getCheckMove(Board* b, bool side){
+    ChessMove result = make_pair(make_pair(A, -1), make_pair(A, -1));
+    vector<PossibleMoves> myMoves = b->getAllAvailableMoves(side);
+    for(auto move : myMoves){
+        Position start_pos = move.start;
+        vector<Position> dest = move.destination;
+        for(auto d : dest){
+            ChessMove target = make_pair(start_pos, d);
+            ChessMove back = make_pair(d, start_pos);
+            b->testMove(target, false);
+            if(b->inCheck(!side)){
+                b->badMove(back, false);
+                result.first = start_pos;
+                result.second = d;
+                return result;
+            }
+            b->badMove(back, false);
+        }
+    }
+    return result;
+}
+
 //helper function for getting a list of moves that possibly captures an opponent piece
 vector<PossibleMoves> getLevel2MoveList(vector<PossibleMoves> pm, Board* b, bool side){
     vector<PossibleMoves> lvl2MoveList;
@@ -48,27 +71,18 @@ vector<PossibleMoves> getLevel2MoveList(vector<PossibleMoves> pm, Board* b, bool
     return lvl2MoveList;
 }
 
-//level 2 focus on capture and checks
+//level 2 focus on checks first, and then captures
 ChessMove getLevel2Move(vector<PossibleMoves> pm, Board* b, bool side){
-    ChessMove result;
-    vector<PossibleMoves> lvl2MoveList = getLevel2MoveList(pm, b, side);
-
-    //if we do have a list of moves that potentially leads to a capture
-    if(!lvl2MoveList.empty()){ 
-        for(auto myMove : lvl2MoveList){
-            for(auto d : myMove.destination){
-                //if this in fact is a check, we want to go there first
-                if(b->getType(d).first == PieceType::King){
-                    result.first = myMove.start;
-                    result.second = d;
-                }
-                //if not checks are avalible, we just capture a random piece.
-                else{
-                    result = randomMove(lvl2MoveList); 
-                }
-            }
-        }
+    //first let's check if we do have a move that leads to a check
+    ChessMove result = getCheckMove(b, side);
+    if(result.first.second != -1){
+        return result;
     }
+
+    vector<PossibleMoves> lvl2MoveList = getLevel2MoveList(pm, b, side);
+    //if we do have a list of moves that potentially leads to a capture
+    //and no checks are avalible, we just capture a random piece.
+    if(!lvl2MoveList.empty()){ result = randomMove(lvl2MoveList); }
     //if we dont have any captures, just perform a random move
     else { result = randomMove(pm); }
     return result;
@@ -146,12 +160,6 @@ ChessMove Computer::getNextMove(Board* b){
         }
         if(!curMove.destination.empty()){ pmList.emplace_back(curMove); }
     }
-
-    //if no moves are avalible, its stalemate
-    if(pmList.empty()){
-        ChessMove staleGame = make_pair(make_pair(A, -2), make_pair(A, -2));
-        return staleGame;
-    }
     
     ChessMove result;
     //level one just makes a random move
@@ -176,10 +184,22 @@ ChessMove Computer::getNextMove(Board* b){
     //use our algorithm according to diff level to calculate the result and return
     b->nextMove(result, true);
 
+    if(b->inCheck(!(this->side))){
+        side ? cout<<"White is in check"<<endl : cout<<"Black is in check"<<endl;
+    }
     //check if this move kills the opponent
     if(checkMate(b, side)){
+        //check for stale games
+        if(checkStale(b, side)){
+            ChessMove staleGame = make_pair(make_pair(A, -2), make_pair(A, -2));
+            return staleGame;
+        }
         ChessMove endGame = make_pair(make_pair(A, -1), make_pair(A, -1));
         return endGame;
+    }
+    //check if a pawn can be promoted, and promote to queen
+    if((result.second.second == 8 || result.second.second == 1)&& b->getType(result.second).first == PieceType::Pawn){
+        b->promote(result.second, 'Q');
     }
     return result;
 }

@@ -23,20 +23,11 @@ bool Human::checkMove(Board* b, ChessMove nextmove){
     return false;
 }
 
-bool Human::checkStale(Board* b){
-    vector<PossibleMoves> pm = b->getAllAvailableMoves(side);
-    return pm.empty();
-}
-
 ChessMove Human::getNextMove(Board* b){
     Position pos1, pos2;
     string src, target;
     ChessMove result;
     while(cin>>src>>target){
-        if(checkStale(b)){
-            ChessMove staleGame = make_pair(make_pair(A, -2), make_pair(A, -2));
-            return staleGame;
-        }
         if((src.size() != 2 || target.size() != 2 ) || 
             !('@' < toupper(src.at(0)) && toupper(src.at(0)) < 'I' && 
             '@' < toupper(target.at(0)) && toupper(target.at(0)) < 'I')){
@@ -83,7 +74,14 @@ ChessMove Human::getNextMove(Board* b){
         if(b->inCheck(!(this->side))){
             side ? cout<<"White is in check"<<endl : cout<<"Black is in check"<<endl;
         }
+        //if its checkmate
         if(checkMate(b, this->side)){
+            //but nothing can actually capture the king, its stalemate
+            if(checkStale(b, this->side)){
+                ChessMove staleGame = make_pair(make_pair(A, -2), make_pair(A, -2));
+                return staleGame;
+            }
+            //else you just won
             ChessMove endGame = make_pair(make_pair(A, -1), make_pair(A, -1));
             return endGame;
         }

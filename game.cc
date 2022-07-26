@@ -13,6 +13,7 @@ bool Game::isWon(){
 }
 
 void Game::endGame(char status){
+    cout<<*b<<endl;
     if(status == 'g'){
         if(side){
             cout<<"Checkmate! Black player won!"<<endl;

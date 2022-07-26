@@ -9,7 +9,6 @@ public:
     Human(bool);
     bool getSide() override;
     bool checkMove(Board* b, ChessMove nextmove);
-    bool checkStale(Board* b);
     ChessMove getNextMove(Board*) override;
     PlayerType getPlayerType() override;
     ~Human(){};
