@@ -52,10 +52,16 @@ int Cell::moved(){
 }
 
 void Cell::test(){
-    std::shared_ptr<ChessPiece> temp(nullptr);
-    temp = obj;
-    testobj = temp;
+    //std::cout << "saved (" << (int)Pos.first <<", "<< Pos.second << "): "; 
+    obj.swap(testobj);
+    notifyObservers();
+}
 
+void Cell::undo(){
+    std::shared_ptr<ChessPiece> temp(nullptr);
+    //std::cout << "Restored (" << (int)Pos.first <<", "<< Pos.second << "): \n\n"; 
+    obj.swap(testobj);
+    notifyObservers();
 }
 
 Cell::Cell(Position Pos, std::shared_ptr<ChessPiece> p, Observe a): ob{}, obj{p}, Pos{Pos} {

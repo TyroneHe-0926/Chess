@@ -5,7 +5,7 @@ OBJECTS = main.o bishop.o board.o cell.o chesspiece.o computer.o game.o gui.o hu
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}
-	${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC} -lSDL2 -lSDL2_image -lSDL2_ttf
+	${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC} -lSDL2 -lSDL2_image -lSDL2_ttf -lX11
 
 -include ${DEPENDS}
 

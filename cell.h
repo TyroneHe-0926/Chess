@@ -23,6 +23,7 @@ class Cell{
     Piece getType();                              //Return the piece information
     int moved();                                  //Returns the number of moves made
     void test();
+    void undo();
     Cell(Position Pos, std::shared_ptr<ChessPiece> ,Observe a);                //ctor
     ~Cell();                                      //dtor
 };
