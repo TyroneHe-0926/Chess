@@ -26,6 +26,7 @@ class Board{
     Piece getType(Position);
     int moved(Position);
     std::vector<PossibleMoves> getAllAvailableMoves(bool);
+    void promote(Position, char);
     Board();
     ~Board();
     friend std::ostream& operator<<(std::ostream&, Board&);

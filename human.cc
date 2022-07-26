@@ -62,6 +62,17 @@ ChessMove Human::getNextMove(Board* b){
                 cin>>src;
                 continue;
             }
+            if(target[1] == 1 || target[1] == 8){
+                if(b->getType(pos2).first == PieceType::Pawn){
+                    while(cin >> src){
+                        if(src.size() == 1 && (toupper(src[0]) == 'N' || toupper(src[0]) == 'B' ||
+                            toupper(src[0]) == 'Q' || toupper(src[0]) == 'K')){
+                            b->promote(pos2, toupper(src[0]));
+                        }
+                        std::cout << "Invalid command, input should be N, B, R, or Q" << std::endl;
+                    }
+                }
+            }
             break;
         }
         cout << "Invalid move, try again\n";

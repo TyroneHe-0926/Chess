@@ -233,6 +233,27 @@ std::vector<PossibleMoves> Board::getAllAvailableMoves(bool side){
     return list;
 }
 
+void Board::promote(Position p, char c){
+    std::shared_ptr<ChessPiece> nextOccupant;
+    switch(c){
+        case 'Q':
+            nextOccupant = std::make_shared<Queen>(Queen(getType(p).second));
+            break;
+        case 'N':
+            nextOccupant = std::make_shared<Knight>(Knight(getType(p).second));
+            break;
+        case 'R':
+            nextOccupant = std::make_shared<Rook>(Rook(getType(p).second));
+            break;
+        case 'B':
+            nextOccupant = std::make_shared<Bishop>(Bishop(getType(p).second));
+            break;
+        default:
+            break;
+    }
+    grid[p.second-1][p.first-1].setState(nextOccupant);
+}
+
 Board::Board(): grid{}, td{new TextDisplay}, gui{new GUI} {
     for(int i = 1; i <= 8; ++i){
         grid.push_back({Cell({A,i},nullptr,{td,gui}),
