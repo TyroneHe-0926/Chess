@@ -64,11 +64,13 @@ ChessMove Computer::getNextMove(Board* b){
         for(auto d : dest){
             ChessMove target = make_pair(start_pos, d);
             ChessMove back = make_pair(d, start_pos);
-            b->nextMove(target);
-            if(!b->inCheck(side)){
-                curMove.destination.emplace_back(d);
+            b->testMove(target);
+            if(b->inCheck(side)){
+                b->badMove(back);
+                continue;
             }
-            b->nextMove(back);
+            curMove.destination.emplace_back(d);
+            b->badMove(back);
         }
         if(!curMove.destination.empty()){ pmList.emplace_back(curMove); }
     }

@@ -136,6 +136,7 @@ bool Board::inCheck(bool side){
 void Board::nextMove(ChessMove move){
     //should handle deleting killed cells
     std::shared_ptr<ChessPiece> nextOccupant(nullptr);
+    std::cout<<"Setting "<<move.first.first<<","<<move.first.second<<" to "<<move.second.first<<","<<move.second.second<<std::endl;
     list.AddMove(move, getType(move.first), getType(move.second));
     grid[move.first.second-1][((int)move.first.first)-1].setState(nextOccupant);
     grid[move.second.second-1][((int)move.second.first)-1].setState(nextOccupant);
