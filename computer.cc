@@ -134,7 +134,64 @@ ChessMove getLevel3Move(vector<PossibleMoves> pm, Board* b, bool side){
     return result;
 }
 
-ChessMove getLevel4Move(vector<PossibleMoves> pm, Board* b, bool side){}
+void sortPosition(Board* b, vector<Position> arr){
+    int i, j, n = arr.size();
+    for (i = 0; i < n - 1; i++)
+        for (j = 0; j < n - i - 1; j++)
+            if (b->getType(arr[j]).first > b->getType(arr[j+1]).first)
+                swap(arr[j], arr[j + 1]);
+}
+
+void sortMoves(Board* b, vector<PossibleMoves> arr){
+    int i, j, n = arr.size();
+    for (i = 0; i < n - 1; i++)
+        for (j = 0; j < n - i - 1; j++)
+            if (b->getType(arr[j].destination[0]).first > b->getType(arr[j+1].destination[0]).first)
+                swap(arr[j], arr[j + 1]);
+}
+
+vector<PossibleMoves> getLevel4MoveList(vector<PossibleMoves> pm, Board* b, bool side){
+    vector<PossibleMoves> lvl4MoveList = getLevel2MoveList(pm, b, side);
+    for(auto lvl2move : lvl4MoveList){
+        vector<Position> dest = lvl2move.destination;
+        sortPosition(b, dest);
+    }
+    sortMoves(b, lvl4MoveList);
+    return lvl4MoveList;
+}
+//level 4 is a bit more sophisticated than level 2 and 3
+//as it applies the basic logic of 2 and 3
+//while captures the most valuable piece if there is one
+ChessMove getLevel4Move(vector<PossibleMoves> pm, Board* b, bool side){
+    //first let's check if we do have a move that leads to a check
+    ChessMove result = getCheckMove(b, side);
+    if(result.first.second != -1){
+        return result;
+    }
+
+    //sort the cpaturable move list by the value of the capturable piece
+    vector<PossibleMoves> lvl3MoveList = getLevel3MoveList(pm, b, side);
+    vector<PossibleMoves> lvl4MoveList = getLevel4MoveList(lvl3MoveList, b, side);
+
+    //first lets check if there is a valuable piece we could both capture and avoid getting captured
+    if(!lvl4MoveList.empty()){
+        result.first = lvl4MoveList[0].start;
+        result.second = lvl4MoveList[0].destination[0];
+    }
+    else {
+        //if not we choose to capture the most valuable piece
+        lvl4MoveList = getLevel4MoveList(pm, b, side);
+        if(!lvl4MoveList.empty()){
+            result.first = lvl4MoveList[0].start;
+            result.second = lvl4MoveList[0].destination[0];
+        }
+        else{
+            //if not even that we go with level 3's logic
+            result = getLevel3Move(pm, b, side);
+        }
+    }
+    return result;
+}
 
 ChessMove Computer::getNextMove(Board* b){
     vector<PossibleMoves> movelist = b->getAllAvailableMoves(side);
