@@ -38,7 +38,7 @@ void Game::play(){
     int diff;
     int setup = 0;
     while(cin>>command){
-        if(command == "game"){
+        if(command == "game" && !started){
             if(setup == 0){
                 std::stringstream defaultinput;
                 defaultinput << "+ r a8 + n b8 + b c8 + q d8 + k e8 + b f8 + n g8 + r h8 ";
@@ -139,6 +139,9 @@ void Game::play(){
             }
             if(command == "setup"){
                 cout<<"No setup during a game!"<<endl;
+            }
+            if(command == "game"){
+                cout<<"There is currently a game in progress!"<<endl;
             }
         }
         else if(command == "move"){
