@@ -55,7 +55,13 @@ void Game::play(){
                 player1 = new Human{0};
             }
             else{
-                diff = p1.back() - '0';
+                if(p1.back() - '0' < 1 || p1.back() - '0' > 4){
+                    std::cout << "Invalid computer difficulty for player 1, defaulting to level 1" << std::endl;
+                    diff = 1;
+                }
+                else{
+                    diff = p1.back() - '0';
+                }
                 player1 = new Computer{0, diff};
             }
 
@@ -63,7 +69,13 @@ void Game::play(){
                 player2 = new Human{1};
             }
             else{
-                diff = p2.back() - '0';
+                if(p2.back() - '0' < 1 || p2.back() - '0' > 4){
+                    std::cout << "Invalid computer difficulty for player 2, defaulting to level 1" << std::endl;
+                    diff = 1;
+                }
+                else{
+                    diff = p2.back() - '0';
+                }
                 player2 = new Computer{1, diff};
             }
             started = true;

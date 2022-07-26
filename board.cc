@@ -200,7 +200,6 @@ void Board::testMove(ChessMove move, bool update){
 }
 
 void Board::badMove(ChessMove move, bool update){
-    //std::cout << "undoing (" << (int) move.first.first << ", "<< move.first.second <<") in badMove: ";
     nextMove(move, false);
     if(update){
         grid[move.first.second-1][((int)move.first.first)-1].movent();
@@ -254,7 +253,7 @@ void Board::promote(Position p, char c){
     grid[p.second-1][p.first-1].setState(nextOccupant);
 }
 
-Board::Board(): grid{}, td{new TextDisplay}, gui{new GUI} {
+Board::Board(): grid{}, td{new TextDisplay}, gui{new GUI()} {
     for(int i = 1; i <= 8; ++i){
         grid.push_back({Cell({A,i},nullptr,td),
             Cell({B,i},nullptr,td), 
@@ -265,11 +264,12 @@ Board::Board(): grid{}, td{new TextDisplay}, gui{new GUI} {
             Cell({G,i},nullptr,td), 
             Cell({H,i},nullptr,td)});
     }
+    gui->update(td);
 }
 
 Board::~Board(){
-    delete td;
     delete gui;
+    delete td;
 }
 
 std::ostream& operator<<(std::ostream& out, Board& pb){

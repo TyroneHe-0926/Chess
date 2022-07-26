@@ -69,7 +69,6 @@ std::vector<Position> Pawn::getAvalibleMoves(Position pos, Board* b) {
     }
 
     //for black player, pawn can only go down
-    //std::cout << side << " " << moves << std::endl;
     if(side && y-1 >= 1){
         retpos.first = pos.first;
         retpos.second = y-1;

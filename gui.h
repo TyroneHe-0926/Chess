@@ -8,7 +8,7 @@ class GUI {
     const Colour light = {(char)255,(char)228,(char)181};
     const Colour dark = {(char)131, (char)42, (char)13};
     const int dispsize = 702;
-    Screen s;
+    Screen *s;
     void drawBoard();
     int updates;
   public:

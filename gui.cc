@@ -4,9 +4,6 @@
 #include "cell.h"
 #include "textdisplay.h"
 
-#include <chrono>
-#include <thread>
-
 void GUI::drawPiece(char type, int j, int i){
     updates++;
     int square = dispsize/9;
@@ -16,84 +13,94 @@ void GUI::drawPiece(char type, int j, int i){
     Colour outcol = {(char)0, (char)0, (char)0};
     if((i+j)%2 == 0){outcol = light;}
     else{outcol = dark;}
-    s.draw_rect(locx, locy, square, square, outcol);
+    s->draw_rect(locx, locy, square, square, outcol);
     switch(type){
         case 'P':
-            s.draw_img("Pawn", locx, locy);
+            s->draw_img("WPawn", locx, locy);
             break;
         case 'p':
-            s.draw_img("Pawn", locx, locy);
+            s->draw_img("BPawn", locx, locy);
             break;
         case 'R':
-            s.draw_img("Rook", locx, locy);
+            s->draw_img("WRook", locx, locy);
             break;
         case 'r':
-            s.draw_img("Rook", locx, locy);
+            s->draw_img("BRook", locx, locy);
             break;
         case 'N':
-            s.draw_img("Knight", locx, locy);
+            s->draw_img("WKnight", locx, locy);
             break;
         case 'n':
-            s.draw_img("Knight", locx, locy);
+            s->draw_img("BKnight", locx, locy);
             break;
         case 'B':
-            s.draw_img("Bishop", locx, locy);
+            s->draw_img("WBishop", locx, locy);
             break;
         case 'b':
-            s.draw_img("Bishop", locx, locy);
+            s->draw_img("BBishop", locx, locy);
             break;
         case 'Q':
-            s.draw_img("Queen", locx, locy);
+            s->draw_img("WQueen", locx, locy);
             break;
         case 'q':
-            s.draw_img("Queen", locx, locy);
+            s->draw_img("BQueen", locx, locy);
             break;
         case 'K':
-            s.draw_img("King", locx, locy);
+            s->draw_img("WKing", locx, locy);
             break;
         case 'k':
-            s.draw_img("King", locx, locy);
+            s->draw_img("BKing", locx, locy);
             break;
     }
 }
 
 void GUI::drawBoard(){
-    s.draw_rect(0,0, dispsize, dispsize, dark);
+    s->draw_rect(0,0, dispsize, dispsize, dark);
     int square = dispsize/9;
     int start = square/2;
     for(int i = 0; i < 8; i++){
         for(int j = 0; j < 8; j++){
             if((i+j)%2 == 0){
-                s.draw_rect(start+(square*i), start+(square*j), 
+                s->draw_rect(start+(square*i), start+(square*j), 
                     square, square, light);
             }
         }
     }
+    s->draw_img("Row", 39, 664);
+    s->draw_img("Col", 0, 19);
 }
 
 
 void GUI::update(TextDisplay* disp){
     updates = 0;
     drawBoard();
-    int square = dispsize/9;
-    int start = square/2;
     for(int i = 0; i < 8; i++){
         for(int j = 0; j < 8; j++){
             drawPiece(disp->atPos(i, j), i, j);
         }
     }
-    s.update();
+    s->update();
 }
 
-GUI::GUI(): s{Screen(dispsize,dispsize,"Chess")}, updates{0}{
-    s.add_img("Pawn", "images/BPawn.png");
-    s.add_img("Rook", "images/rook.png");
-    s.add_img("Knight", "images/knight.png");
-    s.add_img("Bishop", "images/bishop.png");
-    s.add_img("Queen", "images/queen.png");
-    s.add_img("King", "images/king.png");
+GUI::GUI(): s{new Screen(dispsize,dispsize,"Chess")}, updates{0}{
+    s->add_img("BPawn", "images/BPawn.png");
+    s->add_img("BRook", "images/BRook.png");
+    s->add_img("BKnight", "images/BKnight.png");
+    s->add_img("BBishop", "images/BBishop.png");
+    s->add_img("BQueen", "images/BQueen.png");
+    s->add_img("BKing", "images/BKing.png");
+    s->add_img("WPawn", "images/WPawn.png");
+    s->add_img("WRook", "images/WRook.png");
+    s->add_img("WKnight", "images/WKnight.png");
+    s->add_img("WBishop", "images/WBishop.png");
+    s->add_img("WQueen", "images/WQueen.png");
+    s->add_img("WKing", "images/WKing.png");
+    s->add_img("Row", "images/Row.png");
+    s->add_img("Col", "images/Col.png");
     drawBoard();
     //255,228,181
 };
 
-GUI::~GUI(){}
+GUI::~GUI(){
+    delete s;
+}

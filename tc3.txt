@@ -3,3 +3,4 @@ move b2 b3
 move e7 e6
 move b3 b4
 move f8 c5
+game human human
