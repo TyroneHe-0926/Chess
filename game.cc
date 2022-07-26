@@ -8,9 +8,6 @@ using namespace std;
 Game::Game() : b{new Board()}, side{0}, checkmate{false}, started{false}, player1{nullptr}, player2{nullptr}, 
                 computer{0}, player1Score{0}, player2Score{0}{}
 
-bool Game::isWon(){
-    return checkmate;
-}
 
 void Game::endGame(char status){
     cout<<*b<<endl;

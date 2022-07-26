@@ -16,7 +16,6 @@ class Game{
     void endGame(char);
   public:
     void play();
-    bool isWon();
     Game();
     ~Game();
 };
