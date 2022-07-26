@@ -18,12 +18,12 @@ bool Player::checkMate(Board* b, bool side){
         for(auto d : dest){
             ChessMove target = make_pair(start_pos, d);
             ChessMove back = make_pair(d, start_pos);
-            b->testMove(target);
+            b->testMove(target, false);
             if(!b->inCheck(opp)){
-                b->badMove(back);
+                b->badMove(back, false);
                 return false;
             }
-            b->badMove(back);
+            b->badMove(back, false);
         }
     }
     return true;

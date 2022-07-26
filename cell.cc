@@ -24,9 +24,22 @@ void Cell::attach(Observer* obs){
 void Cell::setState(std::shared_ptr<ChessPiece>& next){
     if(obj){
         obj->moved();
+        std::string input;
+        if((Pos.second == 8 || Pos.second == 1 )&& obj->getType().first == PieceType::Pawn){
+            std::cin >> input;
+        }
+        while(input.size() > 1){
+
+        }
     }
     obj.swap(next);
     notifyObservers();
+}
+
+void Cell::movent(){
+    if(obj){
+        obj->undo();
+    }
 }
 
 std::vector<Position> Cell::getAvailableMoves(Board*b){
@@ -52,14 +65,12 @@ int Cell::moved(){
 }
 
 void Cell::test(){
-    //std::cout << "saved (" << (int)Pos.first <<", "<< Pos.second << "): "; 
     obj.swap(testobj);
     notifyObservers();
 }
 
 void Cell::undo(){
-    std::shared_ptr<ChessPiece> temp(nullptr);
-    //std::cout << "Restored (" << (int)Pos.first <<", "<< Pos.second << "): \n\n"; 
+    movent();
     obj.swap(testobj);
     notifyObservers();
 }

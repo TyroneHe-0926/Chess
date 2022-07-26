@@ -32,11 +32,15 @@ void TextDisplay::notify(Cell& c){
 }
 
 std::ostream &operator<<(std::ostream& out, const TextDisplay& ptd){
+    int k = 8;
     for(auto i: ptd.display){
+        out << k-- << " ";
         for(auto j: i){
             out << j;
         }
         out << std::endl;
     }
+    out << std::endl;
+    out << "  abcdefgh" << std::endl;
     return out;
 }

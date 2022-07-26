@@ -22,6 +22,7 @@ class Cell{
     Position getCoords();                         //Return the Coordinates of the cell
     Piece getType();                              //Return the piece information
     int moved();                                  //Returns the number of moves made
+    void movent();
     void test();
     void undo();
     Cell(Position Pos, std::shared_ptr<ChessPiece> ,Observe a);                //ctor

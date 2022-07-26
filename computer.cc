@@ -136,13 +136,13 @@ ChessMove Computer::getNextMove(Board* b){
         for(auto d : dest){
             ChessMove target = make_pair(start_pos, d);
             ChessMove back = make_pair(d, start_pos);
-            b->testMove(target);
+            b->testMove(target, false);
             if(b->inCheck(side)){
-                b->badMove(back);
+                b->badMove(back, false);
                 continue;
             }
             curMove.destination.emplace_back(d);
-            b->badMove(back);
+            b->badMove(back, false);
         }
         if(!curMove.destination.empty()){ pmList.emplace_back(curMove); }
     }
@@ -174,7 +174,7 @@ ChessMove Computer::getNextMove(Board* b){
     }
 
     //use our algorithm according to diff level to calculate the result and return
-    b->nextMove(result);
+    b->nextMove(result, true);
 
     //check if this move kills the opponent
     if(checkMate(b, side)){

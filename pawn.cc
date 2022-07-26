@@ -35,11 +35,15 @@ std::vector<Position> Pawn::getAvalibleMoves(Position pos, Board* b) {
             b->getType(retpos).second != b->getType(pos).second){
                 result.emplace_back(retpos);
             }
-            retpos.second = 5;
-            if(y == 5 && b->getType(retpos).first == PieceType::Pawn && b->moved(retpos) == 1){
-                ChessMove lastmove = {{(locationx)x, 7}, {(locationx)x, 5}};
-                if(lastmove == b->lastMove()){
-                    retpos.second = 6;
+            retpos.second = y;
+            retpos.first = (locationx)(x+1);
+            if(y+2 < 8 && b->getType(retpos).first == PieceType::Pawn && b->moved(retpos) == 1){
+                std::cout << "EN PASSANT";
+                ChessMove expmove = {{retpos.first, y+2}, {retpos.first, y}};
+                ChessMove lastmove = b->lastMove();
+                if(lastmove == expmove){
+                    std::cout << " INCOMING\n";
+                    retpos.second = y+1;
                     result.emplace_back(retpos);
                 }
             }
@@ -51,11 +55,15 @@ std::vector<Position> Pawn::getAvalibleMoves(Position pos, Board* b) {
             b->getType(retpos).second != b->getType(pos).second){
                 result.emplace_back(retpos);
             }
-            retpos.second = 5;
-            if(y == 5 && b->getType(retpos).first == PieceType::Pawn && b->moved(retpos) == 1){
-                ChessMove lastmove = {{(locationx)x, 7}, {(locationx)x, 5}};
-                if(lastmove == b->lastMove()){
-                    retpos.second = 6;
+            retpos.second = y;
+            retpos.first = (locationx)(x-1);
+            if(y+2 < 8 && b->getType(retpos).first == PieceType::Pawn && b->moved(retpos) == 1){
+                std::cout << "EN PASSANT";
+                ChessMove expmove = {{retpos.first, y+2}, {retpos.first, y}};
+                ChessMove lastmove = b->lastMove();
+                if(lastmove == expmove){
+                    std::cout << " INCOMING\n";
+                    retpos.second = y+1;
                     result.emplace_back(retpos);
                 }
             }
@@ -63,6 +71,7 @@ std::vector<Position> Pawn::getAvalibleMoves(Position pos, Board* b) {
     }
 
     //for black player, pawn can only go down
+    //std::cout << side << " " << moves << std::endl;
     if(side && y-1 >= 1){
         retpos.first = pos.first;
         retpos.second = y-1;
@@ -82,11 +91,15 @@ std::vector<Position> Pawn::getAvalibleMoves(Position pos, Board* b) {
             b->getType(retpos).second != b->getType(pos).second){
                 result.emplace_back(retpos);
             }
-            retpos.second = 4;
-            if(y == 4 && b->getType(retpos).first == PieceType::Pawn && b->moved(retpos) == 1){
-                ChessMove lastmove = {{(locationx)x, 2}, {(locationx)x, 4}};
-                if(lastmove == b->lastMove()){
-                    retpos.second = 3;
+            retpos.second = y;
+            retpos.first = (locationx)(x+1);
+            if(y-2 > 1 && b->getType(retpos).first == PieceType::Pawn && b->moved(retpos) == 1){
+                ChessMove expmove = {{retpos.first, y-2}, {retpos.first, y}};
+                ChessMove lastmove = b->lastMove();
+                std::cout << "EN PASSANT";
+                if(lastmove == expmove){
+                    std::cout << " INCOMING\n";
+                    retpos.second = y-1;
                     result.emplace_back(retpos);
                 }
             }
@@ -98,11 +111,15 @@ std::vector<Position> Pawn::getAvalibleMoves(Position pos, Board* b) {
             b->getType(retpos).second != b->getType(pos).second){
                 result.emplace_back(retpos);
             }
-            retpos.second = 4;
-            if(y == 4 && b->getType(retpos).first == PieceType::Pawn && b->moved(retpos) == 1){
-                ChessMove lastmove = {{(locationx)x, 2}, {(locationx)x, 4}};
-                if(lastmove == b->lastMove()){
-                    retpos.second = 3;
+            retpos.second = y;
+            retpos.first = (locationx)(x-1);
+            if(y-2 > 1 && b->getType(retpos).first == PieceType::Pawn && b->moved(retpos) == 1){
+                ChessMove expmove = {{retpos.first, y-2}, {retpos.first, y}};
+                ChessMove lastmove = b->lastMove();
+                std::cout << "EN PASSANT" << std::endl;
+                if(lastmove == expmove){
+                    std::cout << " INCOMING\n";
+                    retpos.second = y-1;
                     result.emplace_back(retpos);
                 }
             }

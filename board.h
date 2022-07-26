@@ -17,9 +17,9 @@ class Board{
     bool init(std::istream& in, bool);               //handles setup command
     bool inCheck(bool side);
     void undoMove();
-    void nextMove(ChessMove);
-    void testMove(ChessMove);
-    void badMove(ChessMove);
+    void nextMove(ChessMove, bool);
+    void testMove(ChessMove, bool);
+    void badMove(ChessMove, bool);
     ChessMove lastMove();
     Piece getType(Position);
     int moved(Position);

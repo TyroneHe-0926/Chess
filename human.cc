@@ -54,11 +54,11 @@ ChessMove Human::getNextMove(Board* b){
         result = make_pair(pos1, pos2);
 
         if(checkMove(b, result)){   
-            b->testMove(result);
+            b->testMove(result, true);
             if(b->inCheck(this->side)){
                 cout<<"You cannot move that piece, your king is currently in check!"<<endl;
                 ChessMove original = make_pair(pos2, pos1);
-                b->badMove(original);
+                b->badMove(original, true);
                 cin>>src;
                 continue;
             }

@@ -133,31 +133,62 @@ bool Board::inCheck(bool side){
     return false;
 }
 
-void Board::nextMove(ChessMove move){
+void Board::nextMove(ChessMove move, bool update){
     //should handle deleting killed cells
     std::shared_ptr<ChessPiece> nextOccupant(nullptr);
-    //std::cout<<"Setting "<<move.first.first<<","<<move.first.second<<" to "<<move.second.first<<","<<move.second.second<<std::endl;
-    list.AddMove(move, getType(move.first), getType(move.second));
+    if(update){
+        list.AddMove(move, getType(move.first), getType(move.second));
+        //en passant
+        //ensure that this is only triggered if the source piece is a pawn, the destination is diagonal,
+        //and the destination is empty
+        std::shared_ptr<ChessPiece> clearpawn(nullptr);
+        Piece a = grid[move.first.second-1][((int)move.first.first)-1].getType();
+        Piece dest = grid[move.second.second-1][((int)move.second.first)-1].getType();
+        Position s = move.first;
+        Position d = move.second;
+        if(a.first == PieceType::Pawn && dest.first == PieceType::Empty 
+                && (s.second+1 == d.second || s.second-1 == d.second)
+                && (s.first+1 == d.first || s.first-1 == d.first)){
+            Piece b;
+            if(a.second){
+                b = grid[move.second.second][((int)move.second.first)-1].getType();
+                if(b.first == PieceType::Pawn){
+                    grid[move.second.second][((int)move.second.first)-1].setState(clearpawn);
+                }
+            }
+            else{
+                b = grid[move.second.second-2][((int)move.second.first)-1].getType();
+                if(b.first == PieceType::Pawn){
+                    grid[move.second.second-2][((int)move.second.first)-1].setState(clearpawn);
+                }
+            }
+        }
+    }
     grid[move.first.second-1][((int)move.first.first)-1].setState(nextOccupant);
     grid[move.second.second-1][((int)move.second.first)-1].setState(nextOccupant);
 }
 
-void Board::testMove(ChessMove move){
-    //std::cout << "saving (" << (int) move.second.first << ", "<< move.second.second <<")in testMove: ";
+void Board::testMove(ChessMove move, bool update){
+    if(!update){
+        grid[move.first.second-1][((int)move.first.first)-1].movent();
+        grid[move.first.second-1][((int)move.first.first)-1].movent();
+    }
     grid[move.second.second-1][((int)move.second.first)-1].test();
-    nextMove(move);
-    list.getLastMove();
+    nextMove(move, update);
 }
 
-void Board::badMove(ChessMove move){
+void Board::badMove(ChessMove move, bool update){
     //std::cout << "undoing (" << (int) move.first.first << ", "<< move.first.second <<") in badMove: ";
-    nextMove(move);
+    nextMove(move, false);
+    if(update){
+        grid[move.first.second-1][((int)move.first.first)-1].movent();
+        list.getLastMove();
+    }
     grid[move.first.second-1][((int)move.first.first)-1].undo();
-    list.getLastMove();
 }
 
 ChessMove Board::lastMove(){
-    return list.getLastMove();
+    return list.readLastMove();
 }
 
 Piece Board::getType(Position temp){
