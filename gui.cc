@@ -66,8 +66,18 @@ void GUI::drawBoard(){
             }
         }
     }
-    s->draw_img("Row", 39, 664);
-    s->draw_img("Col", 0, 19);
+    Colour brown = {(char) 64, (char)22, (char)20};
+    for(char i = 'a'; i < 'i'; i++){
+        std::string output;
+        output+=i;
+        int to = square * ((i-'a')+1);
+        s->draw_string(output, to-8, 667, brown);
+    }
+    for(int i = 1; i < 9; i++){
+        std::string output = std::to_string(i);
+        int to = square * (9-i);
+        s->draw_string(output, 12,to-15, brown);
+    }
 }
 
 
@@ -95,8 +105,6 @@ GUI::GUI(): s{new Screen(dispsize,dispsize,"Chess")}, updates{0}{
     s->add_img("WBishop", "images/WBishop.png");
     s->add_img("WQueen", "images/WQueen.png");
     s->add_img("WKing", "images/WKing.png");
-    s->add_img("Row", "images/Row.png");
-    s->add_img("Col", "images/Col.png");
     drawBoard();
     //255,228,181
 };
