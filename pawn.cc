@@ -23,7 +23,7 @@ std::vector<Position> Pawn::getAvalibleMoves(Position pos, Board* b) {
         if(b->getType(retpos).first == PieceType::Empty){
             result.emplace_back(retpos);
             retpos.second = y + 2;
-            if(moves == 0 && b->getType(retpos).first == PieceType::Empty){
+            if(moves == 0 && b->getType(retpos).first == PieceType::Empty && pos.second != 7){
                 result.emplace_back(retpos);
             }
         }
@@ -76,7 +76,7 @@ std::vector<Position> Pawn::getAvalibleMoves(Position pos, Board* b) {
         if(b->getType(retpos).first == PieceType::Empty){
             result.emplace_back(retpos);
             retpos.second = y - 2;
-            if(moves == 0 && b->getType(retpos).first == PieceType::Empty){
+            if(moves == 0 && b->getType(retpos).first == PieceType::Empty && pos.second != 2){
                 result.emplace_back(retpos);
             }
         }
