@@ -21,6 +21,16 @@ void Game::endGame(char status){
             ++player1Score;
         }
     }
+    if(status == 'r'){
+        if(!side){
+            cout<<"Black Resigned! White player won!"<<endl;
+            ++player1Score;
+        }
+        else{
+            cout<<"White Resigned! Black player won!"<<endl;
+            ++player2Score;
+        }
+    }
     if(status == 's'){
         cout<<"Draw game!"<<endl;
         player1Score+=0.5;
@@ -135,7 +145,8 @@ void Game::play(){
                 side ? cout << "Black's turn" << endl : cout << "White's turn" <<endl;
             }
             if(command == "resign"){
-                endGame('g');
+                side = !side;
+                endGame('r');
             }
             if(command == "setup"){
                 cout<<"No setup during a game!"<<endl;
