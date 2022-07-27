@@ -117,14 +117,16 @@ vector<PossibleMoves> getLevel3MoveList(vector<PossibleMoves> pm, Board* b, bool
         theMove.start = myMove.start;
         theMove.destination = {};
         for(auto d : myMove.destination){
-            if(find(badPositions.begin(), badPositions.end(), d) == badPositions.end()) {
+            if(!(find(badPositions.begin(), badPositions.end(), d) != badPositions.end())) {
                 theMove.destination.emplace_back(d);
             }
         }
         if(!theMove.destination.empty()){ noCapList.emplace_back(theMove); }
     }
 
-    //avoid getting captured
+    //now we want to apply the logic from level 2 to focus on cpaturing and checking
+    //while avoiding getting captured
+    lvl3MoveList = getLevel2MoveList(noCapList, b, side);
     return lvl3MoveList;
 }
 
