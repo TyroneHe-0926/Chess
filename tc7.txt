@@ -8,8 +8,8 @@ setup + K a1
 + p c4
 done
 game human human
-move e7 e8 Q
-move e2 e1 R
+move e7 e8 B
+move e2 e1 N
 move a2 a4
 move a7 a5
 move h5 h7

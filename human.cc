@@ -54,7 +54,6 @@ ChessMove Human::getNextMove(Board* b){
             if(pos2.second == 1 || pos2.second == 8){
                 if(b->getType(pos2).first == PieceType::Pawn){
                     while(cin >> src){
-                        std::cout << src << std::endl;
                         if((src == "N" || src == "B" || src == "R" || src == "Q")){
                             b->promote(pos2, toupper(src[0]));
                             break;
