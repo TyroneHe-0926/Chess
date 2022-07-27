@@ -44,7 +44,7 @@ bool Board::init(std::istream& in, bool def){
                 }
                 grid[arg3[1] - '1'][toupper(arg3[0])-'A'].setState(addtoboard);
                 if(def == 0){
-                    std::cout << *td;
+                    std::cout << *this;
                 }
             }
             else{
@@ -59,7 +59,7 @@ bool Board::init(std::istream& in, bool def){
                     std::shared_ptr<ChessPiece> nullchess(nullptr);
                     grid[arg2[1] - '1'][toupper(arg2[0])-'A'].setState(nullchess);
                     if(def == 0){
-                        std::cout << *td;
+                        std::cout << *this;
                     }
                 }
             }
